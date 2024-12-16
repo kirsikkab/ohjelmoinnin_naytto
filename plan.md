@@ -15,7 +15,7 @@ Sovellus, johon käyttäjä voi lisätä omia myynti-ilmoituksia, selata ja hake
 
 ## Ilmoituksen haku
 -Kategorian ja  hakusanan perusteella
-Kartan avulla voi etsiä itseään lähellä olevat myyntikohteet
+-Kartan avulla voi etsiä itseään lähellä olevat myyntikohteet
 
 ## Yleisiä
 -Sovellus mobiilioptimoitu
