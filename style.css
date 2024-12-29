@@ -1,8 +1,36 @@
+body {
+    min-height: 100vh;
+}
+
+#main-content {
+    flex: 1;
+}
+
+/* VÄRITEEMAT */
+
+.theme1 {
+    background-color: #3F81D7;
+    color: #DADEEA;
+}
+
+.theme2 {
+    background-color: #DADEEA;
+    color: #414757;
+}
+
+/* Aclonica-fontti */
+.aclonica-regular {
+    font-family: "Aclonica", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 
 
 /*
 VÄRIT
 sininen: #3F81D7
 tumma: #414757
-vaalee: #DADEEA
+vaalea: #DADEEA
+oranssi: #F5A623
 */
