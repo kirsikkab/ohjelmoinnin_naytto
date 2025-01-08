@@ -11,6 +11,7 @@ Sovellus, johon käyttäjä voi lisätä omia myynti-ilmoituksia, selata ja hake
 
 ## Myynti-ilmoituksen lisäys
 -Vaadittavat tiedot: Otsikko, kuvaus, kategoria (valitaan pudotusvalikosta), hinnoittelu
+-Valittavat kategoriat: lasten vaatteet, naisten vaatteet, miesten vaatteet, kodin tavarat, lemmikkien tavarat, viihde (kirjat, pelit yms), elektroniikka. autot
 -kahden tyyppisiä ilmoituksia: kiinteähintainen ja huutokauppa (lähtöhinta ja aikaraja)
 
 ## Ilmoituksen haku
