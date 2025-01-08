@@ -2,8 +2,24 @@ body {
     min-height: 100vh;
 }
 
+h1{
+    cursor:pointer;
+}
+
 #main-content {
     flex: 1;
+}
+
+#login-button {
+    float:right;
+    padding:5px;
+    margin:10px;
+}
+
+#register-login {
+    margin:20px;
+    text-align:center;
+    flex:1;
 }
 
 /* VÄRITEEMAT */
