@@ -19,7 +19,7 @@ function addUser(){
 
     errors(name, password)
 
-    // Tarkastaa, onko käyttäjälista tyhjä, ja onko nimi käytössä
+    // Tarkastaa, onko userList tyhjä, ja onko nimi jo rekisteröity
     if (Object.keys(userList).length == 0){
         error = false
     }
@@ -32,7 +32,7 @@ function addUser(){
         }
     }
 
-    // Lisää käyttäjän käyttäjälistaan + tavalliset käyttäjät/ylläpitäjät -listaan
+    // Lisää käyttäjän userListiin ja tavalliset käyttäjät/ylläpitäjät -listaan
     if (error == false && name != "" && password != ""){
         if (document.getElementById("normal-user").checked){
             normalUsers[name] = password
@@ -47,7 +47,7 @@ function addUser(){
     }
 }
 
-// Näyttää virheet
+// Näyttää virheet, jos käyttäjänimi- ja/tai salasanakentässä ei ole mitään
 function errors(name, password){
     if (name == "" || password == ""){
         if (name == "" && password == ""){
@@ -59,6 +59,10 @@ function errors(name, password){
         else if (password == ""){
             alert("Anna salasana")
         }
+        //userList = {}
+        //admins = {}
+        //normalUsers = {}
+        //localStorage.clear()
     }
 }
 
