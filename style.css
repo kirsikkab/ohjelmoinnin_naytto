@@ -31,10 +31,14 @@ button:hover {
     gap: 6px; /* Lisää väliä nappien väliin */
 }
 
-#register-login {
+#register-login { /* Rekisteröinti/kirjautumissivu */
     margin:20px;
     text-align:center;
     flex:1;
+}
+
+.invisible{
+    display:none;
 }
 
 /* VÄRITEEMAT */

@@ -59,10 +59,6 @@ function errors(name, password){
         else if (password == ""){
             alert("Anna salasana")
         }
-        //userList = {}
-        //admins = {}
-        //normalUsers = {}
-        //localStorage.clear()
     }
 }
 
@@ -86,4 +82,12 @@ function checkInfo(){
     else{
         alert("Käyttäjänimeä ei löytynyt")
     }
+}
+
+// Poistaa sanakirjojen ja localStorange tiedot
+function clearStorage(){
+    userList = {}
+    admins = {}
+    normalUsers = {}
+    localStorage.clear()
 }
