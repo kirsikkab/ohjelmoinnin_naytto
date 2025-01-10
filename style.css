@@ -2,18 +2,33 @@ body {
     min-height: 100vh;
 }
 
+header {
+    padding: 10px 20px; 
+}
+
 h1{
     cursor:pointer;
+    flex: 1; 
+    text-align: center; 
+    margin: 0; 
+    font-size: 50px;
 }
 
 #main-content {
     flex: 1;
 }
 
-#login-button {
-    float:right;
-    padding:5px;
-    margin:10px;
+button {
+    padding: 5px 14px;
+    border-radius: 10px;
+}
+
+button:hover {
+    border-color: #F5A623;
+}
+
+#btns-header {
+    gap: 6px; /* Lisää väliä nappien väliin */
 }
 
 #register-login {
@@ -41,7 +56,22 @@ h1{
     font-style: normal;
 }
 
+/* Myynti-ilmoitukset */
 
+.listing {
+    max-width: 400px;
+    border: 2px solid #F5A623;
+    border-radius: 20px;
+    padding: 20px 30px;
+}
+
+.h2-listing{
+    border-bottom: 1px solid #F5A623;
+}
+
+.btns-listing {
+    border-top: 1px solid #F5A623;;
+}
 
 /*
 VÄRIT
