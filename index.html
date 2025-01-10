@@ -12,13 +12,28 @@
 </head>
 <body class="theme2 d-flex flex-column">
 
-    <header class="theme1 m-0">
-        <div class="d-flex justify-content-center">
-            <h1 onclick="backToMain()" class="aclonica-regular">Nettikirppis</h1>
+    <header class="d-flex theme1 m-0 pt-4 justify-content-between align-items-center">
+        <h1 onclick="backToMain()" class="aclonica-regular">Nettikirppis</h1>
+        <div id="btns-header" class="d-flex flex-column align-items-end">
+            <button class="theme2">Jätä myynti-ilmoitus</button>
+            <button onclick="clickLogin()" class="theme2" id="login-button">Kirjaudu/Rekisteröidy</button>
         </div>
-        <button onclick="clickLogin()" class="theme2" id="login-button">Kirjaudu/Rekisteröidy</button>
     </header>
-    <div id="main-content" class="theme2">Tänne myynti-ilmot yms</div>
+
+    <div id="main-content" class="theme2">
+
+        <!--Myynti-ilmoitukset-->
+        <div id="listings" class="d-flex">
+            <div class="listing d-flex flex-column justify-content-center">
+                <h2 class="h2-listing">Leivänpaahdin</h2>
+                <h5 class="h5-listing">Kodinkoneet</h5>
+                <p>Braun-merkkinen leivänpaahdin kahdelle leivälle. Väriltään musta. Siistikuntoinen, vähän käytetty. </p>
+                <h3 class="h3-listing">5 €</h3>
+                <div class="btns-listing d-flex justify-content-center pt-3"><button class="btn-send-message theme1">Lähetä viesti myyjälle</button></div>
+            </div>
+        </div>
+
+    </div>
 
     <footer class="theme2 d-flex justify-content-center"><p>Copyright &#169; Bister, Honkatukia & Uutela 2025</p></footer>
     
