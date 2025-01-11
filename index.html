@@ -9,30 +9,51 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body class="theme2 d-flex flex-column">
 
-    <header class="d-flex theme1 m-0 pt-4 justify-content-between align-items-center">
-        <h1 onclick="backToMain()" class="aclonica-regular">Nettikirppis</h1>
+    <header class="d-flex align-items-center justify-content-between theme1 px-5 py-3">
+        <div class="flex-fill"></div>
+        <h1 onclick="backToMain()" class="aclonica-regular text-start">Nettikirppis</h1>
         <div id="btns-header" class="d-flex flex-column align-items-end">
+
             <!--Myynti-ilmoitusnappi-->
-            <button class="theme2 invisible">Jätä myynti-ilmoitus</button>
+            <button onclick="createNewListing()"  id="btn-new-listing" class="theme2">Jätä myynti-ilmoitus</button> <!--TÄMÄN LUOKKALISTASTA VÄLIAIKAISESTI POISTETTU INVISIBLE-->
 
             <!--Kirjautumisnappi-->
             <button onclick="clickLogin()" class="theme2" id="login-button">Kirjaudu/Rekisteröidy</button>
         </div>
     </header>
 
-    <div id="main-content" class="theme2">
+    <div class="main-content theme2">
 
         <!--Myynti-ilmoitukset-->
-        <div id="listings" class="d-flex">
+        <div id="listings" class="d-flex justify-content-center p-4">
+
+            <!--Esimerkki kiinteähintainen leivänpaahdin-->
             <div class="listing d-flex flex-column justify-content-center">
                 <h2 class="h2-listing">Leivänpaahdin</h2>
-                <h5 class="h5-listing">Kodinkoneet</h5>
-                <p>Braun-merkkinen leivänpaahdin kahdelle leivälle. Väriltään musta. Siistikuntoinen, vähän käytetty. </p>
-                <h3 class="h3-listing">5 €</h3>
+                <h5 class="h5-listing">Elektroniikka</h5>
+                <p class="listing-description">Braun-merkkinen leivänpaahdin kahdelle leivälle. Väriltään musta. Siistikuntoinen, vähän käytetty. </p>
+                <p class="listing-price"><span class="price">5</span> €</p>
                 <div class="btns-listing d-flex justify-content-center pt-3"><button class="btn-send-message theme1">Lähetä viesti myyjälle</button></div>
+            </div>
+
+            <!--Esimerkki huutokauppa Aalto-vaasi-->
+            <div class="listing d-flex flex-column justify-content-center">
+                <h2 class="h2-listing">Aalto-vaasi</h2>
+                <h5 class="h5-listing">Kodin tavarat</h5>
+                <p class="listing-description">Kirkas Aalto-vaasi, korkeus 16 cm. En löydä moitteita, kaapin perällä ollut. </p>
+                <p class="listing-price">Lähtöhinta: <span class="start-price">20</span> €</p>
+                <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">28.2.2024</span></p>
+                <p class="bid-made m-0">Tarjottu: <span class="bid">21</span> €</p>
+                <p class="bid-made m-0">Tarjottu: <span class="bid">25</span> €</p>
+                <p class="bid-made m-0">Tarjottu: <span class="bid">26</span> €</p>
+                <div class="btns-listing d-flex justify-content-center pt-3"><button class="btn-bid theme1">Tarjoa hintaa</button></div>
             </div>
         </div>
 
