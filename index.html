@@ -22,23 +22,38 @@
         <div id="btns-header" class="d-flex flex-column align-items-end">
 
             <!--Myynti-ilmoitusnappi-->
-            <button id="btn-new-listing" class="theme2">Jätä myynti-ilmoitus</button>
+            <button onclick="createNewListing()"  id="btn-new-listing" class="theme2">Jätä myynti-ilmoitus</button> <!--TÄMÄN LUOKKALISTASTA VÄLIAIKAISESTI POISTETTU INVISIBLE-->
 
             <!--Kirjautumisnappi-->
             <button onclick="clickLogin()" class="theme2" id="login-button">Kirjaudu/Rekisteröidy</button>
         </div>
     </header>
 
-    <div id="main-content" class="theme2">
+    <div class="main-content theme2">
 
         <!--Myynti-ilmoitukset-->
-        <div id="listings" class="d-flex">
+        <div id="listings" class="d-flex justify-content-center p-4">
+
+            <!--Esimerkki kiinteähintainen leivänpaahdin-->
             <div class="listing d-flex flex-column justify-content-center">
                 <h2 class="h2-listing">Leivänpaahdin</h2>
-                <h5 class="h5-listing">Kodinkoneet</h5>
-                <p>Braun-merkkinen leivänpaahdin kahdelle leivälle. Väriltään musta. Siistikuntoinen, vähän käytetty. </p>
-                <h3 class="h3-listing">5 €</h3>
+                <h5 class="h5-listing">Elektroniikka</h5>
+                <p class="listing-description">Braun-merkkinen leivänpaahdin kahdelle leivälle. Väriltään musta. Siistikuntoinen, vähän käytetty. </p>
+                <p class="listing-price"><span class="price">5</span> €</p>
                 <div class="btns-listing d-flex justify-content-center pt-3"><button class="btn-send-message theme1">Lähetä viesti myyjälle</button></div>
+            </div>
+
+            <!--Esimerkki huutokauppa Aalto-vaasi-->
+            <div class="listing d-flex flex-column justify-content-center">
+                <h2 class="h2-listing">Aalto-vaasi</h2>
+                <h5 class="h5-listing">Kodin tavarat</h5>
+                <p class="listing-description">Kirkas Aalto-vaasi, korkeus 16 cm. En löydä moitteita, kaapin perällä ollut. </p>
+                <p class="listing-price">Lähtöhinta: <span class="start-price">20</span> €</p>
+                <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">28.2.2024</span></p>
+                <p class="bid-made m-0">Tarjottu: <span class="bid">21</span> €</p>
+                <p class="bid-made m-0">Tarjottu: <span class="bid">25</span> €</p>
+                <p class="bid-made m-0">Tarjottu: <span class="bid">26</span> €</p>
+                <div class="btns-listing d-flex justify-content-center pt-3"><button class="btn-bid theme1">Tarjoa hintaa</button></div>
             </div>
         </div>
 
