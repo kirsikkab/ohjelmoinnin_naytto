@@ -4,6 +4,7 @@ body {
 
 header {
     padding: 30px 20px; 
+    border-bottom: 3px solid #F5A623; /* PIDETÄÄNKÖ?? */
 }
 
 h1{
@@ -13,7 +14,7 @@ h1{
     font-size: 50px;
 }
 
-#main-content {
+.main-content {
     flex: 1;
 }
 
@@ -27,7 +28,7 @@ button:hover {
 }
 
 #btns-header {
-    gap: 6px; /* Lisää väliä nappien väliin */
+    gap: 6px; 
 }
 
 #register-login { /* Rekisteröinti/kirjautumissivu */
@@ -60,21 +61,37 @@ button:hover {
 }
 
 /* Myynti-ilmoitukset */
+#listings {
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
 
 .listing {
-    max-width: 400px;
+    max-width: 300px;
     border: 2px solid #F5A623;
     border-radius: 20px;
-    padding: 20px 30px;
+    padding: 15px 20px;
 }
 
 .h2-listing{
     border-bottom: 1px solid #F5A623;
 }
 
+.listing-price {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.closing-date {
+    font-size: 14px;
+}
+
 .btns-listing {
     border-top: 1px solid #F5A623;;
 }
+
+
 
 /*
 VÄRIT
