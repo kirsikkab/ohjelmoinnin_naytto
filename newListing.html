@@ -69,11 +69,37 @@
                     </label>
                 </div>
 
-                <div id="give-set-price" class="form-group row">
-                    <label for="set-price" class="col-sm-2 col-form-label">Hinta: </label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="set-price" placeholder="">
+                <!-- Kiinteän hinnan syöttäminen -->
+                <div id="give-set-price" class="form-group row my-2">
+                    <div class="d-flex align-items-center">
+                        <label for="set-price" class="form-label me-2">Hinta:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control input-price" id="set-price" placeholder="" min="0">
+                            <span class="input-group-text">€</span>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Huutokauppatietojen syöttäminen -->
+                <div id="auction-info" class=" d-flex flex-column my-2 invisible">
+
+                    <!-- hinta -->
+                    <div class="form-group">
+                        <div class="d-flex align-items-center">
+                            <label for="starting-price" class="form-label">Lähtöhinta:</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control input-price" id="starting-price" placeholder="" min="0">
+                                <span class="input-group-text">€</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- sulkautumis-pvm -->
+                    <div>
+                        <label for="auction-end">Huutokauppa päättyy:</label>
+                        <input type="datetime-local" id="auction-end" min="">
+                    </div>
+
                 </div>
                 
                 <!--Jätä ilmoitus -nappi-->

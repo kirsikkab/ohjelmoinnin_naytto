@@ -2,9 +2,25 @@ body {
     min-height: 100vh;
 }
 
+button {
+    padding: 5px 14px;
+    border-radius: 10px;
+}
+
+button:hover {
+    border-color: #F5A623;
+}
+
+.invisible{
+    display:none;
+    height: 0;
+    margin-bottom: 0;
+}
+
+/* Header */
 header {
     padding: 30px 20px; 
-    border-bottom: 3px solid #F5A623; /* PIDETÄÄNKÖ?? */
+    border-bottom: 3px solid #F5A623;
 }
 
 h1{
@@ -18,15 +34,6 @@ h1{
     flex: 1;
 }
 
-button {
-    padding: 5px 14px;
-    border-radius: 10px;
-}
-
-button:hover {
-    border-color: #F5A623;
-}
-
 #btns-header {
     gap: 6px; 
 }
@@ -35,10 +42,6 @@ button:hover {
     margin:20px;
     text-align:center;
     flex:1;
-}
-
-.invisible{
-    display:none;
 }
 
 /* VÄRITEEMAT */
@@ -80,11 +83,33 @@ button:hover {
 
 .listing-price {
     font-size: 25px;
-    font-weight: bold;
 }
 
 .closing-date {
     font-size: 14px;
+}
+
+.highest-bid {
+    font-size: 25px;
+}
+
+/* myynti-ilmoituksen teko */
+
+.input-price {
+    width: 100px;
+}
+
+.input-group-text {
+    background-color: white !important;
+    color: #414757 !important;
+}
+
+.form-group .d-inline-flex {
+    gap: 8px; 
+}
+
+#auction-info {
+    gap: 8px;
 }
 
 .btns-listing {
