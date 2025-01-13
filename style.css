@@ -45,6 +45,11 @@ h1{
     flex:1;
 }
 
+#back-button {
+    width:160px;
+    margin:15px;
+}
+
 /* VÄRITEEMAT */
 
 .theme1 {
