@@ -1,6 +1,9 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("form-leave-new-listing");
+
     // Oikean hinnoitteluvaihtoehdon näkyminen käyttäjälle
     const radioSetPrice = document.getElementById("radio-set-price");
     const radioAuction = document.getElementById("radio-auction");
@@ -47,5 +50,37 @@ document.addEventListener("DOMContentLoaded", function () {
         const isoString = now.toISOString().slice(0, 16);
         auctionEndInput.min = isoString;
     }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Kerää lomaketiedot
+        const title = document.getElementById("listing-name").value;
+        const category = document.getElementById("listing-category").value;
+        const description = document.getElementById("listing-text").value;
+        const isAuction = radioAuction.checked;
+        const price = isAuction
+            ? document.getElementById("starting-price").value
+            : document.getElementById("set-price").value;
+        const auctionEnd = isAuction ? auctionEndInput.value : null;
+
+        // Luo ilmoitusobjekti
+        const newListing = {
+            title,
+            category,
+            description,
+            isAuction,
+            price: parseFloat(price),
+            auctionEnd,
+        };
+
+        // Tallenna ilmoitus localStorageen
+        const listings = JSON.parse(localStorage.getItem("listings")) || [];
+        listings.push(newListing);
+        localStorage.setItem("listings", JSON.stringify(listings));
+
+        // Palaa etusivulle
+        window.location.replace("index.html");
+    });
     
 });

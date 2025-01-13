@@ -28,6 +28,7 @@ h1{
     flex: 1; 
     margin: 0; 
     font-size: 50px;
+    text-shadow: 2px 1px 2px #F5A623;
 }
 
 .main-content {
@@ -76,7 +77,7 @@ h1{
 }
 
 .listing {
-    max-width: 300px;
+    max-width: 280px;
     border: 2px solid #F5A623;
     border-radius: 20px;
     padding: 15px 20px;
@@ -84,10 +85,15 @@ h1{
 
 .h2-listing{
     border-bottom: 1px solid #F5A623;
+    font-size: 25px;
+}
+
+.h5-listing{
+    font-size: 15px;
 }
 
 .listing-price {
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .closing-date {
@@ -95,7 +101,7 @@ h1{
 }
 
 .highest-bid {
-    font-size: 25px;
+    font-size: 18px;
 }
 
 /* myynti-ilmoituksen teko */
@@ -121,6 +127,10 @@ h1{
     border-top: 1px solid #F5A623;;
 }
 
+#new-listing-error {
+    color: #c1121f;
+}
+
 
 
 /*
@@ -129,4 +139,5 @@ sininen: #3F81D7
 tumma: #414757
 vaalea: #DADEEA
 oranssi: #F5A623
+punainen: #C1121F
 */
