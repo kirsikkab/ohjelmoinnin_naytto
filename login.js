@@ -75,7 +75,7 @@ function checkInfo(){
         }
         else{
             window.localStorage.setItem("admins", JSON.stringify(admins))
-            localStorage.setItem("name", name)
+            window.localStorage.setItem('name', name)
             window.location.replace("index.html")
         }
     }
