@@ -22,46 +22,24 @@
         </div>
     </header>
 
-    <button id="back-button" onclick=backToMain()>Takaisin etusivulle</button>
-
-    <!-- Rekisteröityminen -->
+    <!-- Takaisin etu- tai kirjautumissivulle-->
     <div id="register-login">
-        <h2>Rekisteröidy</h2><br>
-        <label for="username">Käyttäjänimi</label>
-        <input type="text" id="new-name" placeholder="Kirjoita käyttäjänimi" name="username" required>
-        <label for="password">Salasana</label>
-        <input type="text" id="new-password" placeholder="Kirjoita salasana" name="password" required><br><br>
-
-        <label for="normalUser">Tavallinen käyttäjä</label>
-        <input type="radio" id="normal-user" name="userType" value="normalUser" checked>
-        <label for="admin">Ylläpitäjä</label>
-        <input type="radio" id="admin" name="userType" value="admin"><br><br>
-
-        <input type="submit" class="checking-buttons" id="register" value="Rekisteröidy" onclick=addUser()><br><br>
-
-    <!-- Kirjautuminen -->
-        <h2>Kirjaudu sisään</h2><br>
-        <label for="username">Käyttäjänimi</label>
-        <input type="text" id="registered-username" placeholder="Kirjoita käyttäjänimi" name="username" required>
-        <label for="password">Salasana</label>
-        <input type="text" id="registered-password" placeholder="Kirjoita salasana" name="password" required><br><br>
-
-        <input type="submit" class="checking-buttons" id="login" value="Kirjaudu" onclick=checkInfo()><br><br>
-
-        <input type="submit" class="checking-buttons" id="delete" value="Poista tiedot" onclick="clearStorage()">
-    
+        <h2>Olet kirjautunut ulos</h2><br>
+        <button onclick="backToMain()">Palaa etusivulle</button>
+        <button onclick="backToLogin()">Palaa kirjautumissivulle</button>
     </div>
 
     <footer class="theme2 d-flex justify-content-center"><p>Copyright &#169; Bister, Honkatukia & Uutela 2025</p></footer>
     
-    <script src="login.js"></script>
-
     <script>
         function backToMain(){
             window.location.replace("index.html")
         }
+        function backToLogin(){
+            window.location.replace("login.html")
+        }
     </script>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
