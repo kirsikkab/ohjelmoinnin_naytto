@@ -1,17 +1,27 @@
 document.addEventListener("load", checkLogin())
 
+// Siirrytäänkö kirjaudu- vai kirjaudu ulos -sivulle klikattaessa
 function clickLogin(){
-    window.location.replace("login.html")
+    if(document.getElementById("login-button").innerHTML == "Kirjaudu ulos"){
+        localStorage.removeItem("name")
+        window.location.replace("logout.html")
+    }
+    else{
+        window.location.replace("login.html")
+    }
 }
 
+// Takaisin etusivulle
 function backToMain(){
     window.location.replace("index.html")
 }
 
+// Luo uusi ilmoitus
 function createNewListing() {
     window.location.replace("newListing.html")
 }
 
+// Tarkastaa, onko joku kirjautunut sisään ja vaihdetaanko sivun ulkomuotoa sen johdosta
 function checkLogin(){
     let username = localStorage.getItem("name")
     if(username == null && document.getElementById("btn-new-listing").classList[1] != "invisible"){
