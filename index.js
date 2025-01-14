@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       )}</span> €</p>
                        <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
                            listing.auctionEnd
-                       ).toLocaleString()}</span></p>`
+                       ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toFixed(
                           2
                       )}</span> €</p>`
