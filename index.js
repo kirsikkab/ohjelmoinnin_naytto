@@ -40,15 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="listing-description">${listing.description}</p>
             ${
                 listing.isAuction
-                    ? `<p class="listing-price">Lähtöhinta: <span class="start-price">${listing.price.toFixed(
-                          2
-                      )}</span> €</p>
+                    ? `<p class="listing-price">Lähtöhinta: <span class="start-price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>
                        <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
                            listing.auctionEnd
                        ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>`
-                    : `<p class="listing-price"><span class="price">${listing.price.toFixed(
-                          2
-                      )}</span> €</p>`
+                    : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
             <div class="btns-listing d-flex justify-content-center pt-3">
                 ${
