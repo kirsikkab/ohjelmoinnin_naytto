@@ -34,14 +34,16 @@
         <label for="email">Sähköposti</label>
         <input type="text" id="new-email" placeholder="Kirjoita sähköposti" name="email" required>
         <label for="locality">Paikkakunta</label>
-        <input type="text" id="new-locality" placeholder="Kirjoita paikkakunta" name="locality" required><br><br>
+        <select id="new-locality">
 
+        </select><br><br>
+            
         <label for="normalUser">Tavallinen käyttäjä</label>
         <input type="radio" id="normal-user" name="userType" value="normalUser" checked>
         <label for="admin">Ylläpitäjä</label>
         <input type="radio" id="admin" name="userType" value="admin"><br><br>
 
-        <button type="submit" class="checking-buttons" id="register" onclick=addUser()>Rekisteröidy</button><br><br>
+        <button class="checking-buttons" id="register" onclick=addUser()>Rekisteröidy</button><br><br>
 
     <!-- Kirjautuminen -->
         <h2>Kirjaudu sisään</h2><br>
@@ -50,9 +52,9 @@
         <label for="password">Salasana</label>
         <input type="text" id="registered-password" placeholder="Kirjoita salasana" name="password" required><br><br>
 
-        <button type="submit" class="checking-buttons" id="login" onclick=checkInfo()>Kirjaudu</button><br><br>
+        <button class="checking-buttons" id="login" onclick=checkInfo()>Kirjaudu</button><br><br>
 
-        <button type="submit" class="checking-buttons" id="delete" onclick="clearStorage()">Poista tiedot</button>
+        <button class="checking-buttons" id="delete" onclick="clearStorage()">Poista tiedot</button>
     
     </div>
 
