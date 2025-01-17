@@ -39,7 +39,8 @@ h1{
     gap: 6px; 
 }
 
-#register-login { /* Rekisteröinti/kirjautumissivu */
+/* Rekisteröinti/kirjautumissivu */
+#register-login {
     margin:20px;
     text-align:center;
     flex:1;
@@ -48,6 +49,10 @@ h1{
 #back-button {
     width:160px;
     margin:15px;
+}
+
+.userTypeChoice {
+    margin:10px;
 }
 
 /* VÄRITEEMAT */

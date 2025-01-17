@@ -56,7 +56,7 @@ function addUser(){
 
     errors(name, password, email, locality)
 
-    // Tarkastaa, onko userList tyhjä, ja onko nimi jo rekisteröity
+    // Tarkastaa, onko userList tyhjä, ja onko nimi ja sähköposti jo rekisteröity
     if (Object.keys(userList).length == 0){
         error = false
     }
@@ -66,7 +66,19 @@ function addUser(){
                 alert("Käyttäjänimi on jo käytössä")
                 error = true
             }
+            if (email == userList[x][1]){
+                alert("Sähköposti on jo käytössä")
+                error = true
+            }
         }
+    }
+
+    // Tarkistaa onko sähköposti oikeanmuotoinen
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+    
+    if (regex.test(email) == false && email != ""){
+        alert("Anna oikeanmuotoinen sähköposti")
+        error = true
     }
 
     // Lisää käyttäjän userListiin ja tavalliset käyttäjät/ylläpitäjät -listaan
@@ -112,7 +124,6 @@ function errors(name, password, email, locality){
 function checkInfo(){
     name = document.getElementById("registered-username").value
     let password = document.getElementById("registered-password").value
-    let locality
 
     errors(name, password)
 
@@ -132,6 +143,25 @@ function checkInfo(){
     }
 }
 
+// Näyttää salasanan nappia painettaessa
+function showPassword(){
+    let passwordField
+    let passwordButton = event.target.id
+    if (passwordButton == "show-password-register"){
+        passwordField = document.getElementById("new-password")
+    }
+    else{
+        passwordField = document.getElementById("registered-password")
+    }
+
+    if (passwordField.type === "password"){
+        passwordField.type="text"
+    }
+    else{
+        passwordField.type="password"
+    }
+}
+
 // Luo kuntalistan
 function generateLocalityList(){
     for (i=0; i<309; i++){
@@ -142,7 +172,7 @@ function generateLocalityList(){
     }
 }
 
-// Poistaa sanakirjojen ja localStorange tiedot
+// Poistaa sanakirjojen ja localStoragen tiedot
 function clearStorage(){
     userList = {}
     admins = {}
