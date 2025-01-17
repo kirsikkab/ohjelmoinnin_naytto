@@ -40,6 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hae localStoragesta tallennetut ilmoitukset
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
 
+    // Hae kirjautuneen käyttäjän tiedot
+    const loggedInUser = sessionStorage.getItem('loggedInUser'); 
+    const user = JSON.parse(localStorage.getItem(loggedInUser)); 
+    console.log(user)
+    const userLocation = user.locality;
+     
+
     // Luo HTML-ilmoitukset
     listings.forEach((listing) => {
         const listingElement = document.createElement("div");
@@ -48,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         listingElement.innerHTML = `
             <h2 class="h2-listing">${listing.title}</h2>
             <h5 class="h5-listing">${listing.category}</h5>
+            <h5 class="location">${userLocation}</h5>
             <p class="listing-description">${listing.description}</p>
             ${
                 listing.isAuction
