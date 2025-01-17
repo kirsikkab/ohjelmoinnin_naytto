@@ -4,6 +4,7 @@ document.addEventListener("load", checkLogin())
 function clickLogin(){
     if(document.getElementById("login-button").innerHTML == "Kirjaudu ulos"){
         localStorage.removeItem("name")
+        localStorage.removeItem("locality")
         window.location.replace("logout.html")
     }
     else{
