@@ -112,6 +112,7 @@ function errors(name, password, email, locality){
 function checkInfo(){
     name = document.getElementById("registered-username").value
     let password = document.getElementById("registered-password").value
+    let locality
 
     errors(name, password)
 
@@ -122,6 +123,7 @@ function checkInfo(){
         else{
             window.localStorage.setItem("admins", JSON.stringify(admins))
             window.localStorage.setItem('name', name)
+            window.localStorage.setItem("locality", userList[name][2])
             window.location.replace("index.html")
         }
     }
