@@ -5,7 +5,7 @@ Sovellus, johon käyttäjä voi lisätä omia myynti-ilmoituksia, selata ja hake
 ## Rekisteröityminen ja kirjautuminen
 -Kirjautumatta voi selata ja hakea ilmoituksia
 -Sivun ylälaidassa rekisteröitymis/kirjautumismahdollisuus käyttäjälle ja ylläpitäjälle
--Rekisteröitymisen yhteydessä kysytään sähköpostiosoite (= myös käyttäjätunnus), salasana ja paikkakunta 
+-Rekisteröitymisen yhteydessä kysytään sähköpostiosoite, käyttäjätunnus, salasana ja paikkakunta 
 -Käyttäjä voi lisätä oman ilmoituksia, lähettää viestin myyjälle / jättää tarjouksen, ilmiantaa ilmoituksen ylläpitäjälle
 -Ylläpitäjä voi tarkastella ilmoituksia ja ilmiantoja ja poistaa ilmoituksia
 
@@ -20,6 +20,6 @@ Sovellus, johon käyttäjä voi lisätä omia myynti-ilmoituksia, selata ja hake
 
 ## Yleisiä
 -Sovellus mobiilioptimoitu
--Nimi?
+-Nimi: Nettikirppis
 -Värimaailma: light mode ja dark mode
 -Bootstrap + custom CSS
