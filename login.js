@@ -132,6 +132,20 @@ function checkInfo(){
     }
 }
 
+// Kirjautumistieto sessionStorageen UUTTA 135-147
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+    
+    const user = JSON.parse(localStorage.getItem(username));
+    if (user && user.password === password) {
+        sessionStorage.setItem('loggedInUser', username); // Tallennetaan kirjautunut käyttäjä
+        document.getElementById('login-form').reset();
+    }
+});
+
 // Luo kuntalistan
 function generateLocalityList(){
     for (i=0; i<309; i++){
