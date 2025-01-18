@@ -42,11 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Hae kirjautuneen käyttäjän tiedot
     const loggedInUser = sessionStorage.getItem('loggedInUser'); 
-    const user = JSON.parse(localStorage.getItem(loggedInUser)); 
-    console.log(user)
+    const userData = localStorage.getItem(loggedInUser);
+    const user = JSON.parse(userData);
+    console.log("Käyttäjätiedot:", user);
+    //const user = JSON.parse(localStorage.getItem(loggedInUser)); 
+    //console.log(user)
     const userLocation = user.locality;
      
-
     // Luo HTML-ilmoitukset
     listings.forEach((listing) => {
         const listingElement = document.createElement("div");
@@ -77,3 +79,5 @@ document.addEventListener("DOMContentLoaded", function () {
         listingsContainer.appendChild(listingElement);
     });
 });
+
+

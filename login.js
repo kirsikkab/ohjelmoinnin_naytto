@@ -163,7 +163,7 @@ function showPassword(){
     }
 }
 
-// Kirjautumistieto sessionStorageen UUTTA 135-147
+// Kirjautumistieto sessionStorageen UUTTA 
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     
