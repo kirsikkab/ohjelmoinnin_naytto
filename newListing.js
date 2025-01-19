@@ -1,10 +1,60 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("form-leave-new-listing");
 
     // Oikean hinnoitteluvaihtoehdon näkyminen käyttäjälle
+    auctionOrNot();
+
+    // Ei voi valita mennyttä aikaa huutokaupan sulkeutumiseen
+    dateControl();
+
+    // Jätä ilmoitus -napin klikkaaminen
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Kerää lomaketiedot
+        const radioSetPrice = document.getElementById("radio-set-price");
+        const radioAuction = document.getElementById("radio-auction");
+
+        const title = document.getElementById("listing-name").value;
+        const category = document.getElementById("listing-category").value;
+        const description = document.getElementById("listing-text").value;
+        const isAuction = radioAuction.checked;
+        const price = isAuction
+            ? document.getElementById("starting-price").value
+            : document.getElementById("set-price").value;
+        const auctionEnd = document.getElementById("auction-end").value;
+        console.log(price);
+
+        // Jos kaikki kentät täytetty, tallennetaan ilmon tiedot ja palataan etusivulle
+        if (title == "" || category == "" || description == "" || price == "" || (isAuction && auctionEnd == "")) {
+            const errorText = document.getElementById("new-listing-error-text");
+            errorText.classList.remove("invisible");
+        } else {
+            // Luo ilmoitusobjekti
+            const newListing = {
+                title,
+                category,
+                description,
+                isAuction,
+                price: parseFloat(price),
+                auctionEnd,
+            };
+
+            // Tallenna ilmoitus localStorageen
+            const listings = JSON.parse(localStorage.getItem("listings")) || [];
+            listings.push(newListing);
+            localStorage.setItem("listings", JSON.stringify(listings));
+
+            // Palaa etusivulle
+            window.location.replace("index.html");
+        }
+    });
+    
+});
+
+// näkyykö käyttäjälle kiinteän hinnan vai huutokaupan syöttö
+function auctionOrNot() {
     const radioSetPrice = document.getElementById("radio-set-price");
     const radioAuction = document.getElementById("radio-auction");
     const giveSetPrice = document.getElementById("give-set-price");
@@ -24,8 +74,10 @@ document.addEventListener("DOMContentLoaded", function () {
             auctionInfo.classList.remove("invisible");
         }
     }
+}
 
-    // Ei voi valita mennyttä aikaa huutokaupan sulkeutumiseen
+// Huutokaupan sulkeutumisjakasi ei voi valita mennyttä aikaa
+function dateControl() {
     const auctionEndInput = document.getElementById("auction-end");
 
     auctionEndInput.addEventListener("input", function () {
@@ -50,37 +102,4 @@ document.addEventListener("DOMContentLoaded", function () {
         const isoString = now.toISOString().slice(0, 16);
         auctionEndInput.min = isoString;
     }
-
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        // Kerää lomaketiedot
-        const title = document.getElementById("listing-name").value;
-        const category = document.getElementById("listing-category").value;
-        const description = document.getElementById("listing-text").value;
-        const isAuction = radioAuction.checked;
-        const price = isAuction
-            ? document.getElementById("starting-price").value
-            : document.getElementById("set-price").value;
-        const auctionEnd = isAuction ? auctionEndInput.value : null;
-
-        // Luo ilmoitusobjekti
-        const newListing = {
-            title,
-            category,
-            description,
-            isAuction,
-            price: parseFloat(price),
-            auctionEnd,
-        };
-
-        // Tallenna ilmoitus localStorageen
-        const listings = JSON.parse(localStorage.getItem("listings")) || [];
-        listings.push(newListing);
-        localStorage.setItem("listings", JSON.stringify(listings));
-
-        // Palaa etusivulle
-        window.location.replace("index.html");
-    });
-    
-});
+}
