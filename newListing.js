@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
 
         // Kerää lomaketiedot
+        const radioSetPrice = document.getElementById("radio-set-price");
+        const radioAuction = document.getElementById("radio-auction");
+
         const title = document.getElementById("listing-name").value;
         const category = document.getElementById("listing-category").value;
         const description = document.getElementById("listing-text").value;
@@ -20,25 +23,32 @@ document.addEventListener("DOMContentLoaded", function () {
         const price = isAuction
             ? document.getElementById("starting-price").value
             : document.getElementById("set-price").value;
-        const auctionEnd = isAuction ? auctionEndInput.value : null;
+        const auctionEnd = document.getElementById("auction-end").value;
+        console.log(price);
 
-        // Luo ilmoitusobjekti
-        const newListing = {
-            title,
-            category,
-            description,
-            isAuction,
-            price: parseFloat(price),
-            auctionEnd,
-        };
+        // Jos kaikki kentät täytetty, tallennetaan ilmon tiedot ja palataan etusivulle
+        if (title == "" || category == "" || description == "" || price == "" || (isAuction && auctionEnd == "")) {
+            const errorText = document.getElementById("new-listing-error-text");
+            errorText.classList.remove("invisible");
+        } else {
+            // Luo ilmoitusobjekti
+            const newListing = {
+                title,
+                category,
+                description,
+                isAuction,
+                price: parseFloat(price),
+                auctionEnd,
+            };
 
-        // Tallenna ilmoitus localStorageen
-        const listings = JSON.parse(localStorage.getItem("listings")) || [];
-        listings.push(newListing);
-        localStorage.setItem("listings", JSON.stringify(listings));
+            // Tallenna ilmoitus localStorageen
+            const listings = JSON.parse(localStorage.getItem("listings")) || [];
+            listings.push(newListing);
+            localStorage.setItem("listings", JSON.stringify(listings));
 
-        // Palaa etusivulle
-        window.location.replace("index.html");
+            // Palaa etusivulle
+            window.location.replace("index.html");
+        }
     });
     
 });
