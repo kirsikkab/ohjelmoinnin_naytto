@@ -37,17 +37,11 @@ function checkLogin(){
 document.addEventListener("DOMContentLoaded", function () {
     const listingsContainer = document.getElementById("listings");
 
-    // Hae localStoragesta tallennetut ilmoitukset
+    // Haetaan localStoragesta tallennetut ilmoitukset
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
 
-    // Hae kirjautuneen käyttäjän tiedot
-    const loggedInUser = sessionStorage.getItem('loggedInUser'); 
-    const userData = localStorage.getItem(loggedInUser);
-    const user = JSON.parse(userData);
-    console.log("Käyttäjätiedot:", user);
-    //const user = JSON.parse(localStorage.getItem(loggedInUser)); 
-    //console.log(user)
-    const userLocation = user.locality;
+    // Hae sessionStoragesta tallennettu paikkakunta
+    const userLocality = sessionStorage.getItem('locality');
      
     // Luo HTML-ilmoitukset
     listings.forEach((listing) => {
@@ -57,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         listingElement.innerHTML = `
             <h2 class="h2-listing">${listing.title}</h2>
             <h5 class="h5-listing">${listing.category}</h5>
-            <h5 class="location">${userLocation}</h5>
+            <h5 class="location">${userLocality}</h5>
             <p class="listing-description">${listing.description}</p>
             ${
                 listing.isAuction
