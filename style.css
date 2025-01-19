@@ -120,6 +120,10 @@ h1{
 
 /* myynti-ilmoituksen teko */
 
+#arrow {
+    text-align: right
+}
+
 .input-price {
     width: 100px;
 }
