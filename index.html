@@ -43,7 +43,41 @@
                 <h5 class="location">Kaarina</h5>
                 <p class="listing-description">Braun-merkkinen leivänpaahdin kahdelle leivälle. Väriltään musta. Siistikuntoinen, vähän käytetty. </p>
                 <p class="listing-price"><span class="price">5,00</span> €</p>
-                <div class="btns-listing d-flex justify-content-center pt-3"><button class="btn-send-message theme1">Lähetä viesti myyjälle</button></div>
+
+                <!--Lähetä viesti -nappi-->
+                <div class="btns-listing d-flex justify-content-center pt-3">
+                    <button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="Leivänpaahdin">Lähetä viesti myyjälle</button>
+                </div>
+
+                <!--Lähetä viesti -modal-->
+                <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Uusi viesti</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group">
+                              <label for="recipient-name" class="col-form-label">Viestisi koskien kohdetta:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">Viestisi:</label>
+                              <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="theme2" data-bs-dismiss="modal">Sulje</button>
+                          <button type="button" class="theme1">Lähetä viesti</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
             </div>
 
             <!--Esimerkki huutokauppa Aalto-vaasi-->
