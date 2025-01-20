@@ -172,7 +172,7 @@ function showPassword(){
 }
 
 // Kirjautumistieto sessionStorageen 
-document.getElementById('register-login').addEventListener('click', function(event) {
+document.getElementById('login').addEventListener('click', function(event) {
     event.preventDefault();
     
     const username = document.getElementById('registered-username').value;
