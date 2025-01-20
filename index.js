@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${
                     listing.isAuction
                         ? `<button class="btn-bid theme1">Tarjoa hintaa</button>`
-                        : `<button class="btn-send-message theme1">Lähetä viesti myyjälle</button>`
+                        : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
                 }
             </div>
         `;
@@ -74,4 +74,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
+// Modaliin päivittyy myyntikohde
+let messageModal = document.getElementById('messageModal');
+messageModal.addEventListener('show.bs.modal', function (event) {
+    const btn = event.relatedTarget;
+    const itemName = btn.getAttribute('data-bs-whatever');
+    const pModal = messageModal.querySelector('.p-modal');
+    pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
+});
