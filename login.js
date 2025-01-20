@@ -74,10 +74,18 @@ function addUser(){
     }
 
     // Tarkistaa onko sähköposti oikeanmuotoinen
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+    let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
     
     if (regex.test(email) == false && email != ""){
         alert("Anna oikeanmuotoinen sähköposti")
+        error = true
+    }
+
+    regex = /(?=.*\d)/
+
+    // Tarkistaa sisältääkö salasana tarvittavat merkit ja onko se tarpeeksi pitkä
+    if (password.length < 6 || regex.test(password) == false){
+        alert("Salasanassa tulee olla vähintään kuusi merkkiä, yksi numero, yksi iso ja pieni kirjain ja ei välilyöntejä")
         error = true
     }
 
@@ -176,7 +184,6 @@ document.getElementById('register-login').addEventListener('click', function(eve
         sessionStorage.setItem('locality', userList[username][2]);
     } 
 });
-
 
 // Luo kuntalistan
 function generateLocalityList(){
