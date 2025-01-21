@@ -79,6 +79,15 @@ h1{
     font-style: normal;
 }
 
+/* Viesti -lähetetty -ilmoitus */
+#alert-msg-sent {
+    display: none;
+    z-index: 1070;
+    left: 50%; 
+    transform: translateX(-50%);
+    max-width: 90%;
+}
+
 /* Myynti-ilmoitukset */
 #listings {
     gap: 10px;

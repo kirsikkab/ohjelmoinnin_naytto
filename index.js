@@ -82,3 +82,48 @@ messageModal.addEventListener('show.bs.modal', function (event) {
     const pModal = messageModal.querySelector('.p-modal');
     pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
 });
+
+// Viestisi lähetetty -ilmoitus
+function showAlert(message) {
+    const alertContainer = document.getElementById('alert-msg-sent');
+    alertContainer.innerHTML = `
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+    alertContainer.style.display = 'block';
+
+    // Piilota ilmoitus 5 sekunnin kuluttua
+    setTimeout(() => {
+        alertContainer.style.display = 'none';
+        alertContainer.innerHTML = ''; // Tyhjennetään sisältö
+    }, 5000);
+}
+
+// Myynti-ilmoituksen "Lähetä viesti" -nappi
+const sendMessageButton = document.querySelector('#messageModal .modal-footer .theme1');
+sendMessageButton.addEventListener('click', function () {
+
+    // Hae viestikentän sisältö
+    const messageTextArea = document.getElementById('message-text');
+    const messageText = messageTextArea.value.trim(); // Poistetaan ylimääräiset välilyönnit alusta ja lopusta
+
+    // Tarkistetaan, onko viestikenttä tyhjä
+    if (messageText === "") {
+        // Näytetään virheilmoitus
+        showAlert('Kirjoitathan viestin viestikenttään!');
+        return; // Estetään napin muut toiminnot
+    }
+
+    // Näytetään ilmoitus viestin lähetyksestä
+    showAlert('Kiitos, viestisi on nyt lähetetty!');
+
+    // Tyhjennetään modalin tekstikenttä
+    messageTextArea.value = "";
+
+    // Piilotetaan modal
+    const messageModal = document.getElementById('messageModal');
+    const modal = bootstrap.Modal.getInstance(messageModal); // Hae modaalin instanssi
+    modal.hide(); // Piilota modal
+});
