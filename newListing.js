@@ -28,8 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Jos kaikki kentät täytetty, tallennetaan ilmon tiedot ja palataan etusivulle
         if (title == "" || category == "" || description == "" || price == "" || (isAuction && auctionEnd == "")) {
-            const errorText = document.getElementById("new-listing-error-text");
-            errorText.classList.remove("invisible");
+            showAlert('alert-new-listing', 'Täytäthän kaikki kentät!', 'danger');
         } else {
             // Luo ilmoitusobjekti
             const newListing = {
@@ -89,12 +88,12 @@ function dateControl() {
             selectedDate.toDateString() === now.toDateString() &&
             selectedDate.getTime() < now.getTime()
         ) {
-            alert("Valitse tulevaisuuteen sijoittuva kellonaika.");
+            showAlert('alert-new-listing', 'Valitse tulevaisuuteen sijoittuva kellonaika!', 'danger');
             auctionEndInput.value = ""; // Tyhjennä kenttä
         }
     });
 
-    // Aseta minimiarvo sivun latauksen yhteydessä
+    // Aseta pvm minimiarvo sivun latauksen yhteydessä
     setMinDateTime();
 
     function setMinDateTime() {

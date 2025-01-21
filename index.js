@@ -84,10 +84,10 @@ messageModal.addEventListener('show.bs.modal', function (event) {
 });
 
 // Viestisi lähetetty -ilmoitus
-function showAlert(message) {
-    const alertContainer = document.getElementById('alert-msg-sent');
+function showAlert(divID, message, color) {
+    const alertContainer = document.getElementById(`${divID}`);
     alertContainer.innerHTML = `
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-${color} alert-dismissible fade show" role="alert">
             ${message}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -101,29 +101,29 @@ function showAlert(message) {
     }, 5000);
 }
 
-// Myynti-ilmoituksen "Lähetä viesti" -nappi
-const sendMessageButton = document.querySelector('#messageModal .modal-footer .theme1');
+// Viestin lähetykseen liittyvät alertit
+const sendMessageButton = document.getElementById("btn-modal-send-msg");
 sendMessageButton.addEventListener('click', function () {
 
     // Hae viestikentän sisältö
     const messageTextArea = document.getElementById('message-text');
-    const messageText = messageTextArea.value.trim(); // Poistetaan ylimääräiset välilyönnit alusta ja lopusta
+    const messageText = messageTextArea.value.trim();
 
-    // Tarkistetaan, onko viestikenttä tyhjä
+    // Onko viestikenttä tyhjä?
     if (messageText === "") {
         // Näytetään virheilmoitus
-        showAlert('Kirjoitathan viestin viestikenttään!');
-        return; // Estetään napin muut toiminnot
+        showAlert('alert-msg', 'Kirjoitathan viestin viestikenttään!', 'danger');
+        return; 
     }
 
     // Näytetään ilmoitus viestin lähetyksestä
-    showAlert('Kiitos, viestisi on nyt lähetetty!');
+    showAlert('alert-msg', 'Kiitos, viestisi on nyt lähetetty!', 'success');
 
     // Tyhjennetään modalin tekstikenttä
     messageTextArea.value = "";
 
     // Piilotetaan modal
     const messageModal = document.getElementById('messageModal');
-    const modal = bootstrap.Modal.getInstance(messageModal); // Hae modaalin instanssi
-    modal.hide(); // Piilota modal
+    const modal = bootstrap.Modal.getInstance(messageModal);
+    modal.hide(); 
 });
