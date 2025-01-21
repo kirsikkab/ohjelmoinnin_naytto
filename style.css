@@ -79,8 +79,8 @@ h1{
     font-style: normal;
 }
 
-/* Viesti -lähetetty -ilmoitus */
-#alert-msg-sent {
+/* Alert */
+#alert-msg, #alert-new-listing {
     display: none;
     z-index: 1070;
     left: 50%; 
@@ -154,9 +154,6 @@ h1{
     border-top: 1px solid #F5A623;;
 }
 
-#new-listing-error {
-    color: #c1121f;
-}
 
 /* Pienet näytöt */
 @media (max-width: 768px) {

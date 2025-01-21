@@ -84,8 +84,8 @@ messageModal.addEventListener('show.bs.modal', function (event) {
 });
 
 // Viestisi lähetetty -ilmoitus
-function showAlert(message, color) {
-    const alertContainer = document.getElementById('alert-msg-sent');
+function showAlert(divID, message, color) {
+    const alertContainer = document.getElementById(`${divID}`);
     alertContainer.innerHTML = `
         <div class="alert alert-${color} alert-dismissible fade show" role="alert">
             ${message}
@@ -101,7 +101,7 @@ function showAlert(message, color) {
     }, 5000);
 }
 
-// Alert
+// Viestin lähetykseen liittyvät alertit
 const sendMessageButton = document.getElementById("btn-modal-send-msg");
 sendMessageButton.addEventListener('click', function () {
 
@@ -112,12 +112,12 @@ sendMessageButton.addEventListener('click', function () {
     // Onko viestikenttä tyhjä?
     if (messageText === "") {
         // Näytetään virheilmoitus
-        showAlert('Kirjoitathan viestin viestikenttään!', 'danger');
+        showAlert('alert-msg', 'Kirjoitathan viestin viestikenttään!', 'danger');
         return; 
     }
 
     // Näytetään ilmoitus viestin lähetyksestä
-    showAlert('Kiitos, viestisi on nyt lähetetty!', 'success');
+    showAlert('alert-msg', 'Kiitos, viestisi on nyt lähetetty!', 'success');
 
     // Tyhjennetään modalin tekstikenttä
     messageTextArea.value = "";
