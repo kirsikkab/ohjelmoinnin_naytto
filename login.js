@@ -81,7 +81,7 @@ function addUser(){
         error = true
     }
 
-    regex = /(?=.*\d)/
+    regex = /^(?!.* )(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]/
 
     // Tarkistaa sisältääkö salasana tarvittavat merkit ja onko se tarpeeksi pitkä
     if (password.length < 6 || regex.test(password) == false){
