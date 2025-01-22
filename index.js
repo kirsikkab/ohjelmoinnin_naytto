@@ -25,12 +25,24 @@ function createNewListing() {
 // Tarkastaa, onko joku kirjautunut sisään ja vaihdetaanko sivun ulkomuotoa sen johdosta
 function checkLogin(){
     let username = localStorage.getItem("name")
-    if(username == null && document.getElementById("btn-new-listing").classList[1] != "invisible"){
-        document.getElementById("btn-new-listing").classList.add("invisible")
+    if (username == null){
+        if (document.getElementById("btn-new-listing").classList[1] != "invisible"){
+            document.getElementById("btn-new-listing").classList.add("invisible")
+        }
+        if (document.getElementById("btn-message").classList[2] != "invisible"){
+            document.getElementById("btn-message").classList.add("invisible")
+        }
+        if (document.getElementById("btn-message-div").classList[3] == "btns-listing"){
+            document.getElementById("btn-message-div").classList.remove("btns-listing")
+        }
     }
-    else if(username != null && document.getElementById("btn-new-listing").classList[1] == "invisible"){
-        document.getElementById("btn-new-listing").classList.remove("invisible")
-        document.getElementById("login-button").innerHTML = "Kirjaudu ulos"
+    else if (username != null){
+        if (document.getElementById("btn-new-listing").classList[1] == "invisible"){
+            document.getElementById("btn-new-listing").classList.remove("invisible")
+            document.getElementById("btn-message").classList.remove("invisible")
+            document.getElementById("btn-message-div").classList.add("btns-listing")
+            document.getElementById("login-button").innerHTML = "Kirjaudu ulos"
+        }
     }
 }
 
