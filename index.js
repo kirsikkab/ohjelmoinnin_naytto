@@ -68,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
                 }
             </div>
+            <div class="btns-listing d-flex justify-content-center pt-3">
+                    <button class="delete-listing theme1">Poista ilmoitus</button>
+            </div>
         `;
 
         listingsContainer.appendChild(listingElement);
