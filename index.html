@@ -69,7 +69,7 @@
                 
                 <!--Tarjoa hintaa -nappi-->
                 <div class="btns-listing d-flex justify-content-center pt-3">
-                    <button class="btn-bid theme1">Tarjoa hintaa</button>
+                    <button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="Aalto-vaasi">Tarjoa hintaa</button>
                 </div>
 
                 <!--Poista ilmoitus -nappi -nappi-->
@@ -107,6 +107,40 @@
             <div class="modal-footer">
               <button type="button" class="theme2" data-bs-dismiss="modal">Sulje</button>
               <button type="button" id="btn-modal-send-msg" class="theme1">Lähetä viesti</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!--Tarjoa hintaa -modal-->
+    <div class="modal fade" id="bidModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLabel">Uusi tarjous</h5>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div>
+                  <p class="p-modal"></p>
+                </div>
+                <div id="give-set-price" class="form-group row my-2">
+                    <div class="d-flex align-items-center">
+                        <label for="bid-amount" class="form-label me-2">Tarjouksesi:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control input-price" id="bid-amount" placeholder="" min="">
+                            <span class="input-group-text">€</span>
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="theme2" data-bs-dismiss="modal">Sulje</button>
+              <button type="button" id="btn-modal-send-msg" class="theme1">Tee tajous</button>
             </div>
           </div>
         </div>

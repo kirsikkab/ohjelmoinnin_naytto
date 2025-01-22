@@ -58,13 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     ? `<p class="listing-price">Lähtöhinta: <span class="start-price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>
                        <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
                            listing.auctionEnd
-                       ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>`
+                       ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
+                       <p class="highest-bid m-0 invisible">Korkein tarjous: <span class="bid">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
             <div class="btns-listing d-flex justify-content-center pt-3">
                 ${
                     listing.isAuction
-                        ? `<button class="btn-bid theme1">Tarjoa hintaa</button>`
+                        ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}">Tarjoa hintaa</button>`
                         : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
                 }
             </div>
@@ -77,16 +78,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Modaliin päivittyy myyntikohde
-let messageModal = document.getElementById('messageModal');
-messageModal.addEventListener('show.bs.modal', function (event) {
-    const btn = event.relatedTarget;
-    const itemName = btn.getAttribute('data-bs-whatever');
-    const pModal = messageModal.querySelector('.p-modal');
-    pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
+// Viestin lähetys ja tarjouksen teko -modaleihin myyntikohteen tiedot
+document.addEventListener('DOMContentLoaded', function () {
+
+    const modals = ['messageModal', 'bidModal'];
+
+    modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+
+        modal.addEventListener('show.bs.modal', function (event) {
+            const btn = event.relatedTarget; 
+            const itemName = btn.getAttribute('data-bs-whatever'); 
+            const pModal = modal.querySelector('.p-modal'); 
+
+            if (modalId === 'messageModal') {
+                pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
+            } else if (modalId === 'bidModal') {
+                pModal.textContent = `Tee tarjous kohteeseen: ${itemName}`;
+            }
+        });
+    });
 });
 
-// Viestisi lähetetty -ilmoitus
+// Alert-ilmoitukset
 function showAlert(divID, message, color) {
     const alertContainer = document.getElementById(`${divID}`);
     alertContainer.innerHTML = `
