@@ -22,6 +22,21 @@
         <h1 onclick="backToMain()" class="aclonica-regular text-start">Nettikirppis</h1>
         <div id="btns-header" class="d-flex flex-column align-items-end">
 
+             <div class="search-container">
+                <input type="text" id="searchKeyword" placeholder="Hakusana">
+                <select id="searchCategory">
+                    <option value="">Valitse kategoria</option>
+                    <option value="lasten vaatteet">Lasten vaatteet</option>
+                    <option value="naisten vaatteet">Naisten vaatteet</option>
+                    <option value="miesten vaatteet">Miesten vaatteet</option>
+                    <option value="kodin tavarat">Kodin tavarat</option>
+                    <option value="lemmikkien tavarat">Lemmikkien tavarat</option>
+                    <option value="viihde">Viihde</option>
+                    <option value="elektroniikka">Elektroniikka</option>
+                </select>
+                <button onclick="filterListings()">Hae</button>
+            </div>
+
             <!--Myynti-ilmoitusnappi-->
             <button onclick="createNewListing()"  id="btn-new-listing" class="theme2 invisible">Jätä myynti-ilmoitus</button> 
 
