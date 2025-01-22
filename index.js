@@ -90,6 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Aktiivinen ilmoitus
+let activeListingElement = null; 
+
 // Viestin lähetys ja tarjouksen teko -modaleihin myyntikohteen tiedot
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
             } else if (modalId === 'bidModal') {
                 pModal.textContent = `Tee tarjous kohteeseen: ${itemName}`;
+                activeListingElement = btn.closest('.listing');
             }
         });
     });
@@ -156,3 +160,45 @@ sendMessageButton.addEventListener('click', function () {
     const modal = bootstrap.Modal.getInstance(messageModal);
     modal.hide(); 
 });
+
+
+function makeBid() {
+
+    // Tarjouskentän sisältö
+    const bidAmount = document.getElementById("bid-amount");
+    const bidValue = parseFloat(bidAmount.value);
+    console.log(`bidValue ${bidValue}`)
+
+    // Korkein tarjous aktiivisesta ilmoituksesta
+    const highestBidElement = activeListingElement.querySelector('.highest-bid');
+    const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
+    console.log(`highestBidValue ${highestBidValue}`)
+
+    // Tarkistetaan, onko uusi tarjous korkeampi kuin aiempi korkein tarjous
+    if (bidValue > highestBidValue) {
+        highestBidElement.querySelector('.bid').textContent = bidValue.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        highestBidElement.classList.remove('invisible'); // Näytetään korkein tarjous
+
+        // Tyhjennetään tarjouskenttä
+        bidAmount.value = '';
+
+        // Piilotetaan modal
+        const bidModal = document.getElementById('bidModal');
+        const modal = bootstrap.Modal.getInstance(bidModal);
+        modal.hide();
+
+        // Näytetään onnistumisilmoitus
+        showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
+
+    } else {
+        showAlert('alert-msg', 'Tarjouksen täytyy olla korkeampi kuin nykyinen korkein tarjous!', 'danger');
+
+        // Tyhjennetään tarjouskenttä
+        bidAmount.value = '';
+    }
+
+    
+
+    
+}
+
