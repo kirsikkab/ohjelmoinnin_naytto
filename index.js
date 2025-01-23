@@ -32,15 +32,11 @@ function checkLogin(){
         if (document.getElementById("btn-message").classList[2] != "invisible"){
             document.getElementById("btn-message").classList.add("invisible")
         }
-        if (document.getElementById("btn-message-div").classList[3] == "btns-listing"){
-            document.getElementById("btn-message-div").classList.remove("btns-listing")
-        }
     }
     else if (username != null){
         if (document.getElementById("btn-new-listing").classList[1] == "invisible"){
             document.getElementById("btn-new-listing").classList.remove("invisible")
             document.getElementById("btn-message").classList.remove("invisible")
-            document.getElementById("btn-message-div").classList.add("btns-listing")
             document.getElementById("login-button").innerHTML = "Kirjaudu ulos"
         }
     }
@@ -87,6 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
         listingsContainer.appendChild(listingElement);
+
+        modifyButtons()
     });
 });
 
@@ -115,6 +113,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Piilottaa/näyttää eri nappeja riippuen siitä, onko kirjauduttu
+function modifyButtons(){
+    let sendButtons = document.getElementsByClassName("btn-send-message")
+    let offerButtons = document.getElementsByClassName("btn-bid")
+    username = localStorage.getItem("name")
+    for (let i = 0; i < sendButtons.length; i++){
+        if (username == null){
+            sendButtons[i].style.display = "none"
+        }
+        else if (username != null){
+            sendButtons[i].style.display = ""
+        }
+    }
+    for (let i = 0; i < offerButtons.length; i++){
+        if (username == null){
+            offerButtons[i].style.display = "none"
+        }
+        else if (username != null){
+            offerButtons[i].style.display = ""
+        }
+    }
+}
 
 // Alert-ilmoitukset
 function showAlert(divID, message, color) {
