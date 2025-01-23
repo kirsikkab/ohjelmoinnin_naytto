@@ -82,10 +82,12 @@ h1{
 /* Alert */
 #alert-msg, #alert-new-listing {
     display: none;
+    position: sticky;
+    top: 100px;
     z-index: 1070;
     left: 50%; 
     transform: translateX(-50%);
-    max-width: 90%;
+    max-width: 800px;
 }
 
 /* Myynti-ilmoitukset */
@@ -127,6 +129,10 @@ h1{
     font-size: 18px;
 }
 
+.btns-listing {
+    border-top: 1px solid #F5A623;;
+}
+
 /* myynti-ilmoituksen teko */
 
 #arrow {
@@ -150,10 +156,6 @@ h1{
     gap: 8px;
 }
 
-.btns-listing {
-    border-top: 1px solid #F5A623;;
-}
-
 
 /* Pienet näytöt */
 @media (max-width: 768px) {
@@ -169,6 +171,10 @@ h1{
     }
     .flex-fill {
         display: none;
+    }
+
+    #alert-msg, #alert-new-listing {
+        max-width: 90%;
     }
 }
 
