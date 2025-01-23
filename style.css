@@ -82,8 +82,8 @@ h1{
 /* Alert */
 #alert-msg, #alert-new-listing {
     display: none;
-    position: sticky;
-    top: 100px;
+    position: fixed;
+    top: 140px;
     z-index: 1070;
     left: 50%; 
     transform: translateX(-50%);
