@@ -70,15 +70,17 @@ document.addEventListener("DOMContentLoaded", function () {
                        <p class="highest-bid m-0 invisible">Korkein tarjous: <span class="bid">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
-            <div class="btns-listing d-flex justify-content-center pt-3">
-                ${
-                    listing.isAuction
-                        ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}">Tarjoa hintaa</button>`
-                        : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
-                }
-            </div>
-            <div class="btns-listing d-flex justify-content-center pt-3">
-                    <button class="delete-listing theme1">Poista ilmoitus</button>
+            <div class="btns-listing d-flex flex-column justify-content-center pt-3">
+                <div class="d-flex justify-content-center">
+                    ${
+                        listing.isAuction
+                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}">Tarjoa hintaa</button>`
+                            : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
+                    }
+                </div>
+                <div class="d-flex justify-content-center">
+                        <button class="delete-listing theme1">Poista ilmoitus</button>
+                </div>
             </div>
         `;
 
@@ -188,12 +190,10 @@ function makeBid() {
     // Tarjouskentän sisältö
     const bidAmount = document.getElementById("bid-amount");
     const bidValue = parseFloat(bidAmount.value);
-    console.log(`bidValue ${bidValue}`)
 
     // Korkein tarjous aktiivisesta ilmoituksesta
     const highestBidElement = activeListingElement.querySelector('.highest-bid');
     const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
-    console.log(`highestBidValue ${highestBidValue}`)
 
     // Tarkistetaan, onko uusi tarjous korkeampi kuin aiempi korkein tarjous
     if (bidValue > highestBidValue) {
