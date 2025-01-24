@@ -218,8 +218,7 @@ function makeBid() {
         bidAmount.value = '';
     }
 
-    
-
-    
 }
+
+
 
