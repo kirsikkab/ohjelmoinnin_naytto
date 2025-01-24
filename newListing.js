@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
             ? document.getElementById("starting-price").value
             : document.getElementById("set-price").value;
         const auctionEnd = document.getElementById("auction-end").value;
-        console.log(price);
+        // Hae sessionStoragesta tallennettu paikkakunta
+        const userLocality = sessionStorage.getItem('locality');
+        console.log(userLocality);
 
         // Jos kaikki kentät täytetty, tallennetaan ilmon tiedot ja palataan etusivulle
         if (title == "" || category == "" || description == "" || price == "" || (isAuction && auctionEnd == "")) {
@@ -34,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const newListing = {
                 title,
                 category,
+                userLocality,
                 description,
                 isAuction,
                 price: parseFloat(price),
