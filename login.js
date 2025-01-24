@@ -1,6 +1,3 @@
-if (localStorage.getItem("admins") == null){
-    localStorage.setItem("admins", JSON.stringify({}))
-}
 let admins = JSON.parse(localStorage.getItem("admins"))
 
 if (localStorage.getItem("userList") == null){

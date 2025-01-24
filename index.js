@@ -1,3 +1,7 @@
+if (localStorage.getItem("admins") == null){
+    localStorage.setItem("admins", JSON.stringify({}))
+}
+
 document.addEventListener("load", checkLogin())
 
 // Siirrytäänkö kirjaudu- vai kirjaudu ulos -sivulle klikattaessa
@@ -40,6 +44,7 @@ function checkLogin(){
             document.getElementById("login-button").innerHTML = "Kirjaudu ulos"
         }
     }
+    modifyButtons()
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -120,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function modifyButtons(){
     let sendButtons = document.getElementsByClassName("btn-send-message")
     let offerButtons = document.getElementsByClassName("btn-bid")
+    let removeButtons = document.getElementsByClassName("delete-listing")
     username = localStorage.getItem("name")
     for (let i = 0; i < sendButtons.length; i++){
         if (username == null){
@@ -135,6 +141,27 @@ function modifyButtons(){
         }
         else if (username != null){
             offerButtons[i].style.display = ""
+        }
+    }
+
+    if (localStorage.getItem("admins") != "{}"){
+        let admins = JSON.parse(localStorage.getItem("admins"))
+        for (let i = 0; i < Object.keys(admins).length; i++){
+            if (username != Object.keys(admins)[i]){
+                for (let i = 0; i < removeButtons.length; i++){
+                    removeButtons[i].style.display = "none"
+                }
+            }
+            else if (username == Object.keys(admins)[i]){
+                for (let i = 0; i < removeButtons.length; i++){
+                    removeButtons[i].style.display = "block"
+                }
+            }
+        }
+    }
+    else {
+        for (let i = 0; i < removeButtons.length; i++){
+            removeButtons[i].style.display = "none"
         }
     }
 }
