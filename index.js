@@ -152,7 +152,13 @@ function modifyButtons(){
             }
             else if (username == Object.keys(admins)[i]){
                 for (let i = 0; i < removeButtons.length; i++){
-                    removeButtons[i].style.display = "block"
+                    removeButtons[i].style.display = ""
+                }
+                for (let i = 0; i < sendButtons.length; i++){
+                    sendButtons[i].style.display = "none"
+                }
+                for (let i = 0; i < offerButtons.length; i++){
+                    offerButtons[i].style.display = "none"
                 }
             }
         }
