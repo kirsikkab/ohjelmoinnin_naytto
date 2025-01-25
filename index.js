@@ -52,14 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Haetaan localStoragesta tallennetut ilmoitukset
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
-
-    // Hae sessionStoragesta tallennettu paikkakunta
-    //const userLocality = sessionStorage.getItem('locality');
      
     // Luo HTML-ilmoitukset
     listings.forEach((listing) => {
         const listingElement = document.createElement("div");
         listingElement.className = "listing d-flex flex-column justify-content-center";
+        console.log(`LISTINGS: ${localStorage.getItem("listings")}`); //CONSOLE LOG!!!!!!
 
         listingElement.innerHTML = `
             <h2 class="h2-listing">${listing.title}</h2>
@@ -72,14 +70,14 @@ document.addEventListener("DOMContentLoaded", function () {
                        <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
                            listing.auctionEnd
                        ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
-                       <p class="highest-bid m-0 invisible">Korkein tarjous: <span class="bid">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
+                       <p class="highest-bid m-0 invisible">Korkein tarjous: <span class="bid">${listing.highestBid.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
             <div class="btns-listing d-flex flex-column justify-content-center pt-3">
                 <div class="d-flex justify-content-center">
                     ${
                         listing.isAuction
-                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}">Tarjoa hintaa</button>`
+                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}" data-title="${listing.title}" onclick="biddingInfo(this)">Tarjoa hintaa</button>`
                             : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
                     }
                 </div>
@@ -211,22 +209,51 @@ sendMessageButton.addEventListener('click', function () {
     modal.hide(); 
 });
 
+let currentTitle;
+const makeBidButton = document.getElementById("btn-modal-make-bid");
 
-function makeBid() {
+function biddingInfo(button) {
+    currentTitle = button.getAttribute("data-title"); // Hae ilmoituksen otsikko napista
+    console.log("Napin data-title:", currentTitle); // CONSOLE LOG TOIMII!!!!!
+}
+
+// Lähetä tarjous
+makeBidButton.addEventListener("click", function () {
+    console.log("click");
+    makeBid(currentTitle); // Välitä otsikko funktiolle
+    console.log("Käsiteltävän myynti-ilmoituksen otsikko:", currentTitle); // CONSOLE LOG TOIMII!!!!!
+});
+
+function makeBid(listingTitle) {
+    console.log("Käsiteltävän myynti-ilmoituksen otsikko:", listingTitle); // CONSOLE LOG TOIMII!!!!!
+    //ilmoitukset localStoragesta
+    const listings = JSON.parse(localStorage.getItem("listings")) || [];
+    currentListing = listings.find(item => item.title === listingTitle)
+    console.log(`CURRENT LISTING ${currentListing.title}`); // CONSOLE LOG TOIMII!!!!!
 
     // Tarjouskentän sisältö
     const bidAmount = document.getElementById("bid-amount");
     const bidValue = parseFloat(bidAmount.value);
+    console.log(`BID VALUE ${bidValue}`); // CONSOLE LOG TOIMII!!!!!
 
     // Korkein tarjous aktiivisesta ilmoituksesta
+    const highestBidValue = currentListing.highestBid;
+    console.log(`HIGHEST BID VALUE ${highestBidValue}`); // CONSOLE LOG TOIMII!!!!!
+    
+    //const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
+
     const highestBidElement = activeListingElement.querySelector('.highest-bid');
-    const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
-
-    // Tarkistetaan, onko uusi tarjous korkeampi kuin aiempi korkein tarjous
+    
+    // Jos uusi tarjous korkeampi kuin aiempi korkein tarjous
     if (bidValue > highestBidValue) {
-        highestBidElement.querySelector('.bid').textContent = bidValue.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        highestBidElement.classList.remove('invisible'); // Näytetään korkein tarjous
+        currentListing.highestBid = bidValue;
+        listings[listings.find(item => listingTitle === currentListing.title)] = currentListing;
+        localStorage.setItem("listings", JSON.stringify(listings));
 
+        if (highestBidElement.classList.contains('invisible')) {
+            highestBidElement.classList.remove('invisible'); // Näytetään korkein tarjous
+        }
+        
         // Tyhjennetään tarjouskenttä
         bidAmount.value = '';
 
