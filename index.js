@@ -215,15 +215,16 @@ sendMessageButton.addEventListener('click', function () {
     modal.hide(); 
 });
 
-let currentTitle;
 const makeBidButton = document.getElementById("btn-modal-make-bid");
 
+// Haetaan ilmoituksen otsikko Tarjoa hintaa -napista
+let currentTitle;
 function biddingInfo(button) {
-    currentTitle = button.getAttribute("data-title"); // Hae ilmoituksen otsikko napista
+    currentTitle = button.getAttribute("data-title"); 
     console.log("Napin data-title:", currentTitle); // CONSOLE LOG TOIMII!!!!!
 }
 
-// Lähetä tarjous
+// Tarjouksen teko
 makeBidButton.addEventListener("click", function () {
     console.log("click");
     makeBid(currentTitle); // Välitä otsikko funktiolle
@@ -235,7 +236,7 @@ function makeBid(listingTitle) {
     //ilmoitukset localStoragesta
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
     currentListing = listings.find(item => item.title === listingTitle)
-    console.log(`CURRENT LISTING ${currentListing.title}`); // CONSOLE LOG TOIMII!!!!!
+    //console.log(`CURRENT LISTING ${currentListing.title}`); // CONSOLE LOG TOIMII!!!!!
 
     // Tarjouskentän sisältö
     const bidAmount = document.getElementById("bid-amount");
@@ -249,12 +250,14 @@ function makeBid(listingTitle) {
     //const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
 
     const highestBidElement = activeListingElement.querySelector('.highest-bid');
+    const highestBidShown = activeListingElement.querySelector('.bid');
     
     // Jos uusi tarjous korkeampi kuin aiempi korkein tarjous
     if (bidValue > highestBidValue) {
         currentListing.highestBid = bidValue;
         listings[listings.find(item => listingTitle === currentListing.title)] = currentListing;
         localStorage.setItem("listings", JSON.stringify(listings));
+        highestBidShown.textContent = bidValue.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         if (highestBidElement.classList.contains('invisible')) {
             highestBidElement.classList.remove('invisible'); // Näytetään korkein tarjous
