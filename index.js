@@ -246,7 +246,6 @@ function makeBid(listingTitle) {
     if (bidValue > highestBidValue) {
         currentListing.highestBid = bidValue; //Ilmoituksen korkeimmalle tarjoukselle uusi arvo
         currentListing.isHighestBidVisible = true; // Korkein tarjous -kenttä näytetään
-        listings[listings.find(item => listingTitle === currentListing.title)] = currentListing; //TARVITAANKO ?????????????????????????????????????????????????????????
 
         // Päivitetään localStorage
         localStorage.setItem("listings", JSON.stringify(listings));
@@ -282,7 +281,7 @@ function bidForVase(){
 
     const highestBidSpanElementVase = document.getElementById('highest-bid-vase');
     const highestBidVase = parseFloat(highestBidSpanElementVase.innerText.replace(',', '.')); // Nykyinen korkein tarjous
-    const bidAmountVase = document.getElementById('bid-amount-vase'); // Käyttäjän tarjous
+    const bidAmountVase = document.getElementById('bid-amount-vase');
     const bidAmountVaseNum = parseFloat(document.getElementById('bid-amount-vase').value); // Käyttäjän tarjous
     const highestBidElementVase = document.getElementById('highest-bid-element-vase');
 
