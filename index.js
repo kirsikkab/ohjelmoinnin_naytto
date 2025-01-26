@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     listings.forEach((listing) => {
         const listingElement = document.createElement("div");
         listingElement.className = "listing d-flex flex-column justify-content-center";
-        console.log(`LISTINGS: ${localStorage.getItem("listings")}`); //CONSOLE LOG!!!!!!
 
         listingElement.innerHTML = `
             <h2 class="h2-listing">${listing.title}</h2>
@@ -221,34 +220,25 @@ const makeBidButton = document.getElementById("btn-modal-make-bid");
 let currentTitle;
 function biddingInfo(button) {
     currentTitle = button.getAttribute("data-title"); 
-    console.log("Napin data-title:", currentTitle); // CONSOLE LOG TOIMII!!!!!
 }
 
 // Tarjouksen teko
 makeBidButton.addEventListener("click", function () {
-    console.log("click");
     makeBid(currentTitle); // Välitä otsikko funktiolle
-    console.log("Käsiteltävän myynti-ilmoituksen otsikko:", currentTitle); // CONSOLE LOG TOIMII!!!!!
 });
 
 function makeBid(listingTitle) {
-    console.log("Käsiteltävän myynti-ilmoituksen otsikko:", listingTitle); // CONSOLE LOG TOIMII!!!!!
     //ilmoitukset localStoragesta
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
     currentListing = listings.find(item => item.title === listingTitle)
-    //console.log(`CURRENT LISTING ${currentListing.title}`); // CONSOLE LOG TOIMII!!!!!
 
     // Tarjouskentän sisältö
     const bidAmount = document.getElementById("bid-amount");
     const bidValue = parseFloat(bidAmount.value);
-    console.log(`BID VALUE ${bidValue}`); // CONSOLE LOG TOIMII!!!!!
 
     // Korkein tarjous aktiivisesta ilmoituksesta
     const highestBidValue = currentListing.highestBid;
-    console.log(`HIGHEST BID VALUE ${highestBidValue}`); // CONSOLE LOG TOIMII!!!!!
     
-    //const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
-
     const highestBidElement = activeListingElement.querySelector('.highest-bid');
     const highestBidShown = activeListingElement.querySelector('.bid');
     
@@ -281,6 +271,39 @@ function makeBid(listingTitle) {
         bidAmount.value = '';
     }
 
+}
+
+// Aalto-vaasista tarjoaminen
+function bidForVase(){
+
+    const highestBidSpanElementVase = document.getElementById('highest-bid-vase');
+    const highestBidVase = parseFloat(highestBidSpanElementVase.innerText.replace(',', '.')); // Nykyinen korkein tarjous
+    const bidAmountVase = document.getElementById('bid-amount-vase'); // Käyttäjän tarjous
+    const bidAmountVaseNum = parseFloat(document.getElementById('bid-amount-vase').value); // Käyttäjän tarjous
+    const highestBidElementVase = document.getElementById('highest-bid-element-vase');
+
+    if (bidAmountVaseNum > highestBidVase) {
+        highestBidSpanElementVase.textContent = bidAmountVaseNum.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        if (highestBidElementVase.classList.contains('invisible')) {
+            highestBidElementVase.classList.remove('invisible'); // Näytetään korkein tarjous
+        }
+
+        // Tyhjennetään tarjouskenttä
+        bidAmountVase.value = '';
+
+        // Piilotetaan modal
+        const bidModalVase = document.getElementById('bidModalVase');
+        const modal = bootstrap.Modal.getInstance(bidModalVase);
+        modal.hide();
+
+        showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
+    } else {
+        showAlert('alert-msg', 'Tarjouksen täytyy olla korkeampi kuin nykyinen korkein tarjous!', 'danger');
+
+        // Tyhjennetään tarjouskenttä
+        bidAmountVase.value = '';
+    }
 }
 
 
