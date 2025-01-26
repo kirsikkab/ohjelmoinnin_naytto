@@ -80,7 +80,7 @@ h1{
 }
 
 /* Alert */
-#alert-msg, #alert-new-listing {
+.alert {
     display: none;
     position: fixed;
     top: 140px;
