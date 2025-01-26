@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
                        <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
                            listing.auctionEnd
                        ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
-                       <p class="highest-bid m-0 invisible">Korkein tarjous: <span class="bid">${listing.highestBid.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
+                       <p class="highest-bid m-0 ${listing.isHighestBidVisible ? '' : 'invisible'}">Korkein tarjous: <span class="bid">${listing.highestBid.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
             <div class="btns-listing d-flex flex-column justify-content-center pt-3">
@@ -244,9 +244,13 @@ function makeBid(listingTitle) {
     
     // Jos uusi tarjous korkeampi kuin aiempi korkein tarjous
     if (bidValue > highestBidValue) {
-        currentListing.highestBid = bidValue;
-        listings[listings.find(item => listingTitle === currentListing.title)] = currentListing;
+        currentListing.highestBid = bidValue; //Ilmoituksen korkeimmalle tarjoukselle uusi arvo
+        currentListing.isHighestBidVisible = true; // Korkein tarjous -kenttä näytetään
+        listings[listings.find(item => listingTitle === currentListing.title)] = currentListing; //TARVITAANKO ?????????????????????????????????????????????????????????
+
+        // Päivitetään localStorage
         localStorage.setItem("listings", JSON.stringify(listings));
+
         highestBidShown.textContent = bidValue.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         if (highestBidElement.classList.contains('invisible')) {

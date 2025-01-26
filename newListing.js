@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const auctionEnd = document.getElementById("auction-end").value;
         // Hae sessionStoragesta tallennettu paikkakunta
         const userLocality = sessionStorage.getItem('locality');
+        const isHighestBidVisible = false;
 
         // Jos kaikki kentät täytetty, tallennetaan ilmon tiedot ja palataan etusivulle
         if (title == "" || category == "" || description == "" || price == "" || (isAuction && auctionEnd == "")) {
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 price: parseFloat(price),
                 highestBid: parseFloat(price),
                 auctionEnd,
+                isHighestBidVisible
             };
 
             // Tallenna ilmoitus localStorageen
