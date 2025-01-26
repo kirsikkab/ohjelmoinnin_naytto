@@ -60,11 +60,11 @@ function addUser(){
     else{
         for (x in userList){
             if (name == x){
-                alert("Käyttäjänimi on jo käytössä")
+                showAlert("alert-error", "Käyttäjänimi on jo käytössä", "danger")
                 error = true
             }
             if (email == userList[x][1]){
-                alert("Sähköposti on jo käytössä")
+                showAlert("alert-error", "Sähköposti on jo käytössä", "danger")
                 error = true
             }
         }
@@ -74,7 +74,7 @@ function addUser(){
     let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
     
     if (regex.test(email) == false && email != ""){
-        alert("Anna oikeanmuotoinen sähköposti")
+        showAlert("alert-error", "Anna oikeanmuotoinen sähköposti", "danger")
         error = true
     }
 
@@ -82,7 +82,7 @@ function addUser(){
 
     // Tarkistaa sisältääkö salasana tarvittavat merkit ja onko se tarpeeksi pitkä
     if (password.length < 6 || regex.test(password) == false){
-        alert("Salasanassa tulee olla vähintään kuusi merkkiä, yksi numero, yksi iso ja pieni kirjain ja ei välilyöntejä")
+        showAlert("alert-error", "Salasanassa tulee olla vähintään kuusi merkkiä, yksi numero, yksi iso ja pieni kirjain ja ei välilyöntejä", "danger")
         error = true
     }
 
@@ -121,7 +121,7 @@ function errors(name, password, email, locality){
         if (locality == ""){
             errorMsg.push(" paikkakunta")
         }
-        alert("Anna " + errorMsg)
+        showAlert("alert-error", "Anna " + errorMsg, "danger")
     }
 }
 
@@ -134,7 +134,7 @@ function checkInfo(){
 
     if (name in userList && Object.keys(userList).length != 0){
         if (password != userList[name][0]){
-            alert("Väärä salasana, yritä uudelleen")
+            showAlert("alert-error", "Väärä salasana, yritä uudelleen", "danger")
         }
         else{
             window.localStorage.setItem("admins", JSON.stringify(admins))
@@ -144,7 +144,7 @@ function checkInfo(){
         }
     }
     else{
-        alert("Käyttäjänimeä ei löytynyt")
+        showAlert("alert-error", "Käyttäjänimeä ei löytynyt", "danger")
     }
 }
 
