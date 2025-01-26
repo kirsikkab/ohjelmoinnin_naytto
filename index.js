@@ -52,9 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Haetaan localStoragesta tallennetut ilmoitukset
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
-
-    // Hae sessionStoragesta tallennettu paikkakunta
-    //const userLocality = sessionStorage.getItem('locality');
      
     // Luo HTML-ilmoitukset
     listings.forEach((listing) => {
@@ -72,14 +69,14 @@ document.addEventListener("DOMContentLoaded", function () {
                        <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
                            listing.auctionEnd
                        ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
-                       <p class="highest-bid m-0 invisible">Korkein tarjous: <span class="bid">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
+                       <p class="highest-bid m-0 ${listing.isHighestBidVisible ? '' : 'invisible'}">Korkein tarjous: <span class="bid">${listing.highestBid.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
             <div class="btns-listing d-flex flex-column justify-content-center pt-3">
                 <div class="d-flex justify-content-center">
                     ${
                         listing.isAuction
-                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}">Tarjoa hintaa</button>`
+                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}" data-title="${listing.title}" onclick="biddingInfo(this)">Tarjoa hintaa</button>`
                             : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
                     }
                 </div>
@@ -217,22 +214,48 @@ sendMessageButton.addEventListener('click', function () {
     modal.hide(); 
 });
 
+const makeBidButton = document.getElementById("btn-modal-make-bid");
 
-function makeBid() {
+// Haetaan ilmoituksen otsikko Tarjoa hintaa -napista
+let currentTitle;
+function biddingInfo(button) {
+    currentTitle = button.getAttribute("data-title"); 
+}
+
+// Tarjouksen teko
+makeBidButton.addEventListener("click", function () {
+    makeBid(currentTitle); // Välitä otsikko funktiolle
+});
+
+function makeBid(listingTitle) {
+    //ilmoitukset localStoragesta
+    const listings = JSON.parse(localStorage.getItem("listings")) || [];
+    currentListing = listings.find(item => item.title === listingTitle)
 
     // Tarjouskentän sisältö
     const bidAmount = document.getElementById("bid-amount");
     const bidValue = parseFloat(bidAmount.value);
 
     // Korkein tarjous aktiivisesta ilmoituksesta
+    const highestBidValue = currentListing.highestBid;
+    
     const highestBidElement = activeListingElement.querySelector('.highest-bid');
-    const highestBidValue = parseFloat(highestBidElement.querySelector('.bid').textContent);
-
-    // Tarkistetaan, onko uusi tarjous korkeampi kuin aiempi korkein tarjous
+    const highestBidShown = activeListingElement.querySelector('.bid');
+    
+    // Jos uusi tarjous korkeampi kuin aiempi korkein tarjous
     if (bidValue > highestBidValue) {
-        highestBidElement.querySelector('.bid').textContent = bidValue.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        highestBidElement.classList.remove('invisible'); // Näytetään korkein tarjous
+        currentListing.highestBid = bidValue; //Ilmoituksen korkeimmalle tarjoukselle uusi arvo
+        currentListing.isHighestBidVisible = true; // Korkein tarjous -kenttä näytetään
 
+        // Päivitetään localStorage
+        localStorage.setItem("listings", JSON.stringify(listings));
+
+        highestBidShown.textContent = bidValue.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        if (highestBidElement.classList.contains('invisible')) {
+            highestBidElement.classList.remove('invisible'); // Näytetään korkein tarjous
+        }
+        
         // Tyhjennetään tarjouskenttä
         bidAmount.value = '';
 
@@ -251,6 +274,39 @@ function makeBid() {
         bidAmount.value = '';
     }
 
+}
+
+// Aalto-vaasista tarjoaminen
+function bidForVase(){
+
+    const highestBidSpanElementVase = document.getElementById('highest-bid-vase');
+    const highestBidVase = parseFloat(highestBidSpanElementVase.innerText.replace(',', '.')); // Nykyinen korkein tarjous
+    const bidAmountVase = document.getElementById('bid-amount-vase');
+    const bidAmountVaseNum = parseFloat(document.getElementById('bid-amount-vase').value); // Käyttäjän tarjous
+    const highestBidElementVase = document.getElementById('highest-bid-element-vase');
+
+    if (bidAmountVaseNum > highestBidVase) {
+        highestBidSpanElementVase.textContent = bidAmountVaseNum.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        if (highestBidElementVase.classList.contains('invisible')) {
+            highestBidElementVase.classList.remove('invisible'); // Näytetään korkein tarjous
+        }
+
+        // Tyhjennetään tarjouskenttä
+        bidAmountVase.value = '';
+
+        // Piilotetaan modal
+        const bidModalVase = document.getElementById('bidModalVase');
+        const modal = bootstrap.Modal.getInstance(bidModalVase);
+        modal.hide();
+
+        showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
+    } else {
+        showAlert('alert-msg', 'Tarjouksen täytyy olla korkeampi kuin nykyinen korkein tarjous!', 'danger');
+
+        // Tyhjennetään tarjouskenttä
+        bidAmountVase.value = '';
+    }
 }
 
 
