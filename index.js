@@ -315,26 +315,46 @@ function bidForVase(){
 
 // Ilmoituksen poisto (Ylläpitäjä)
 
+let listingToDelete = null; // Aktiivinen poistettava ilmoitus
+
 function deleteListing(button) {
+    // poistettavan ilmoituksen elementti ja otsikko
+    listingToDelete = {
+        element: button.closest(".listing"),
+        title: button.getAttribute("data-title")
+    };
 
-    //napin data-title-attribuutti = ilmoituksen otsikko
-    const listingTitle = button.getAttribute("data-title");
+    // Avataan vahvistusmodaali
+    const confirmationModal = new bootstrap.Modal(document.getElementById("confirmationModal"));
+    confirmationModal.show();
+}
 
-    // ilmoitukset localStoragesta
+// Kuunnellaan modalin "Poista"-painiketta
+document.getElementById("confirmDeleteButton").addEventListener("click", function () {
+    if (!listingToDelete) return;
+
+    // Hae ilmoitukset localStoragesta
     const listings = JSON.parse(localStorage.getItem("listings")) || [];
 
-    // Suodatetaan pois poistettava ilmoitus = ilmoitus, joka vastaa napin data-title-arvoa
-    const updatedListings = listings.filter((listing) => listing.title !== listingTitle);
+    // Suodata pois poistettava ilmoitus
+    const updatedListings = listings.filter(listing => listing.title !== listingToDelete.title);
 
-    // Päivitetään localStorage
+    // Päivitä localStorage
     localStorage.setItem("listings", JSON.stringify(updatedListings));
 
-    // Poistetaan ilmoitus myös sivulta
-    button.closest(".listing").remove();
+    // Poista ilmoitus DOM:sta
+    listingToDelete.element.remove();
 
-    // Näytetään ilmoitus onnistuneesta poistosta
+    // Näytä onnistumisilmoitus
     showAlert("alert-msg", "Ilmoitus on poistettu onnistuneesti!", "success");
-}
+
+    // Tyhjennä aktiivinen poistettava ilmoitus
+    listingToDelete = null;
+
+    // Sulje modaali
+    const confirmationModal = bootstrap.Modal.getInstance(document.getElementById("confirmationModal"));
+    confirmationModal.hide();
+});
 
 
 
