@@ -68,11 +68,6 @@
                     <div class="d-flex justify-content-center" id="btn-message-div">
                         <button class="btn-send-message theme1" id="btn-message" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="Leivänpaahdin">Lähetä viesti myyjälle</button>
                     </div>
-                    <!--Poista ilmoitus -nappi -nappi
-                    <div class="d-flex justify-content-center">
-                        <button class="delete-listing theme1" onclick="deleteListing()">Poista ilmoitus</button>
-                    </div>
-                    -->
                 </div>
             </div>
 
@@ -91,11 +86,6 @@
                     <div class="d-flex justify-content-center">
                         <button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModalVase" data-bs-whatever="Aalto-vaasi" data-title="Aalto-vaasi">Tarjoa hintaa</button>
                     </div>
-                    <!--Poista ilmoitus -nappi -nappi
-                    <div class="d-flex justify-content-center">
-                        <button class="delete-listing theme1" onclick="deleteListing()">Poista ilmoitus</button>
-                    </div> 
-                    -->
                 </div>
             </div>
         </div>
@@ -199,7 +189,26 @@
             </div>
           </div>
         </div>
-      </div>
+    </div>
+
+      <!-- Vahvistusmodaali ilmoituksen poistoon -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Vahvista poisto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
+            </div>
+            <div class="modal-body">
+                Haluatko varmasti poistaa tämän ilmoituksen?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Peruuta</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Poista</button>
+            </div>
+        </div>
+        </div>
+    </div>
     
     <script src="changemode.js"></script>
     <script src="index.js"></script>
