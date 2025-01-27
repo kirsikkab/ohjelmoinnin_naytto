@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 </div>
                 <div class="d-flex justify-content-center">
-                        <button class="delete-listing theme1">Poista ilmoitus</button>
+                        <button class="delete-listing theme1" data-title="${listing.title}" onclick="deleteListing(this)">Poista ilmoitus</button>
                 </div>
             </div>
         `;
@@ -307,6 +307,29 @@ function bidForVase(){
         // Tyhjennetään tarjouskenttä
         bidAmountVase.value = '';
     }
+}
+
+// Ilmoituksen poisto (Ylläpitäjä)
+
+function deleteListing(button) {
+
+    //napin data-title-attribuutti = ilmoituksen otsikko
+    const listingTitle = button.getAttribute("data-title");
+
+    // ilmoitukset localStoragesta
+    const listings = JSON.parse(localStorage.getItem("listings")) || [];
+
+    // Suodatetaan pois poistettava ilmoitus = ilmoitus, joka vastaa napin data-title-arvoa
+    const updatedListings = listings.filter((listing) => listing.title !== listingTitle);
+
+    // Päivitetään localStorage
+    localStorage.setItem("listings", JSON.stringify(updatedListings));
+
+    // Poistetaan ilmoitus myös sivulta
+    button.closest(".listing").remove();
+
+    // Näytetään ilmoitus onnistuneesta poistosta
+    showAlert("alert-msg", "Ilmoitus on poistettu onnistuneesti!", "success");
 }
 
 
