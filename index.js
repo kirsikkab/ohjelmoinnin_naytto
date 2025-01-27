@@ -2,6 +2,10 @@ if (localStorage.getItem("admins") == null){
     localStorage.setItem("admins", JSON.stringify({}))
 }
 
+if (localStorage.getItem("theme") == null){
+    localStorage.setItem("theme", "light")
+}
+
 document.addEventListener("load", checkLogin())
 
 // Siirrytäänkö kirjaudu- vai kirjaudu ulos -sivulle klikattaessa
@@ -45,7 +49,7 @@ function checkLogin(){
         }
     }
     modifyButtons()
-}
+    }
 
 document.addEventListener("DOMContentLoaded", function () {
     const listingsContainer = document.getElementById("listings");

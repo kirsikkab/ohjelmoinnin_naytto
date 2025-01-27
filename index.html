@@ -18,13 +18,14 @@
 
     <header class="d-flex align-items-center justify-content-between theme1 px-5 py-3">
 
+      <button class="theme2" id="btn-change-theme" onclick="changeThemes()">Vaihda tummaan tilaan</button>
         <div class="flex-fill"></div>
         <h1 onclick="backToMain()" class="aclonica-regular text-start">Nettikirppis</h1>
         <div id="btns-header" class="d-flex flex-column align-items-end">
 
              <div class="search-container">
-                <input type="text" id="searchKeyword" placeholder="Hakusana">
-                <select id="searchCategory">
+                <input type="text" class="theme2" id="searchKeyword" placeholder="Hakusana">
+                <select id="searchCategory" class="theme2">
                     <option value="">Valitse kategoria</option>
                     <option value="lasten vaatteet">Lasten vaatteet</option>
                     <option value="naisten vaatteet">Naisten vaatteet</option>
@@ -34,7 +35,7 @@
                     <option value="viihde">Viihde</option>
                     <option value="elektroniikka">Elektroniikka</option>
                 </select>
-                <button onclick="filterListings()">Hae</button>
+                <button class="theme2" onclick="filterListings()">Hae</button>
             </div>
 
             <!--Myynti-ilmoitusnappi-->
@@ -200,6 +201,7 @@
         </div>
       </div>
     
+    <script src="changemode.js"></script>
     <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
