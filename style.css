@@ -56,6 +56,12 @@ h1{
     margin:15px;
 }
 
+#btn-change-theme {
+    width:195px;
+    margin-left: 15px;
+    margin-top: -10px;
+}
+
 .userTypeChoice {
     margin:10px;
 }
@@ -183,6 +189,7 @@ h1{
 /*
 VÄRIT
 sininen: #3F81D7
+tummansininen (dark mode): #264E83
 tumma: #414757
 vaalea: #DADEEA
 oranssi: #F5A623
