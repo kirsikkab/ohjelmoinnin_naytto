@@ -80,7 +80,7 @@ h1{
 }
 
 /* Alert */
-#alert-msg, #alert-new-listing {
+#alert-msg, #alert-new-listing, #alert-error {
     display: none;
     position: fixed;
     top: 140px;
@@ -173,7 +173,7 @@ h1{
         display: none;
     }
 
-    #alert-msg, #alert-new-listing {
+    #alert-msg, #alert-new-listing, #alert-error {
         max-width: 90%;
     }
 }
