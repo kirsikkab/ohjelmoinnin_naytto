@@ -173,24 +173,6 @@ function modifyButtons(){
     }
 }
 
-// Alert-ilmoitukset
-function showAlert(divID, message, color) {
-    const alertContainer = document.getElementById(`${divID}`);
-    alertContainer.innerHTML = `
-        <div class="alert alert-${color} alert-dismissible fade show" role="alert">
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    `;
-    alertContainer.style.display = 'block';
-
-    // Piilota ilmoitus 5 sekunnin kuluttua
-    setTimeout(() => {
-        alertContainer.style.display = 'none';
-        alertContainer.innerHTML = ''; // Tyhjennetään sisältö
-    }, 5000);
-}
-
 // Viestin lähetykseen liittyvät alertit
 const sendMessageButton = document.getElementById("btn-modal-send-msg");
 sendMessageButton.addEventListener('click', function () {
@@ -356,5 +338,20 @@ document.getElementById("confirmDeleteButton").addEventListener("click", functio
     confirmationModal.hide();
 });
 
+function showAlert(divID, message, color) {
+    const alertContainer = document.getElementById(`${divID}`);
+    alertContainer.innerHTML = `
+        <div class="alert alert-${color} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+    alertContainer.style.display = 'block';
 
+    // Piilota ilmoitus 5 sekunnin kuluttua
+    setTimeout(() => {
+        alertContainer.style.display = 'none';
+        alertContainer.innerHTML = ''; // Tyhjennetään sisältö
+    }, 5000);
+}
 
