@@ -25,7 +25,9 @@ function backToMain(){
     window.location.replace("index.html")
 }
 
-// Luo uusi ilmoitus
+// Luo uusi ilmoitus -nappi
+document.getElementById("btn-new-listing").addEventListener('click', createNewListing);
+
 function createNewListing() {
     window.location.replace("newListing.html")
 }
@@ -263,6 +265,12 @@ function makeBid(listingTitle) {
 }
 
 // Aalto-vaasista tarjoaminen
+document.addEventListener("click", function (event) {
+    if (event.target && event.target.id === "btn-modal-make-bid") {
+        bidForVase()
+    }
+});
+
 function bidForVase(){
 
     const highestBidSpanElementVase = document.getElementById('highest-bid-vase');
@@ -354,4 +362,3 @@ function showAlert(divID, message, color) {
         alertContainer.innerHTML = ''; // Tyhjennetään sisältö
     }, 5000);
 }
-
