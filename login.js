@@ -70,19 +70,27 @@ function addUser(){
         }
     }
 
-    // Tarkistaa onko sähköposti oikeanmuotoinen
-    let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
-    
-    if (regex.test(email) == false && email != ""){
-        showAlert("alert-error", "Anna oikeanmuotoinen sähköposti", "danger")
+    // Tarkistaa onko käyttäjänimessä välilyöntejä
+    let regex = /^(?!.* )/
+
+    if (regex.test(name) == false && name != ""){
+        showAlert("alert-error", "Käyttäjänimessä ei saa olla välilyöntejä", "danger")
         error = true
     }
 
+    // Tarkistaa sisältääkö salasana tarvittavat merkit ja onko se tarpeeksi pitkä
     regex = /^(?!.* )(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]/
 
-    // Tarkistaa sisältääkö salasana tarvittavat merkit ja onko se tarpeeksi pitkä
-    if (password.length < 6 || regex.test(password) == false){
+    if (password.length < 6 && password != "" || regex.test(password) == false && password != ""){
         showAlert("alert-error", "Salasanassa tulee olla vähintään kuusi merkkiä, yksi numero, yksi iso ja pieni kirjain ja ei välilyöntejä", "danger")
+        error = true
+    }
+
+    // Tarkistaa onko sähköposti oikeanmuotoinen
+    regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+    
+    if (regex.test(email) == false && email != ""){
+        showAlert("alert-error", "Anna oikeanmuotoinen sähköposti", "danger")
         error = true
     }
 
