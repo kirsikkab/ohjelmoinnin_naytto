@@ -42,15 +42,15 @@
                 <div class="form-group my-2">
                     <label for="listing-category">Valitse kategoria:</label>
                     <select class="form-control" id="listing-category">
-                        <option id="arrow">&#9660;</option>
-                        <option>Lasten vaatteet</option>
-                        <option>Naisten vaatteet</option>
-                        <option>Miesten vaatteet</option>
-                        <option>Kodin tavarat</option>
-                        <option>Lemmikkitarvikkeet</option>
-                        <option>Viihde</option>
-                        <option>Elektroniikka</option>
-                        <option>Autot</option>
+                        <option value="" id="arrow">&#9660;</option>
+                        <option value="Lasten vaatteet">Lasten vaatteet</option>
+                        <option value="Naisten vaatteet">Naisten vaatteet</option>
+                        <option value="Miesten vaatteet">Miesten vaatteet</option>
+                        <option value="Kodin tavarat">Kodin tavarat</option>
+                        <option value="Lemmikkitarvikkeet">Lemmikkitarvikkeet</option>
+                        <option value="Viihde">Viihde</option>
+                        <option value="Elektroniikka">Elektroniikka</option>
+                        <option value="Autot">Autot</option>
                     </select>
                 </div>
 
@@ -60,7 +60,7 @@
                     <textarea class="form-control" id="listing-text" rows="5"></textarea>
                 </div>
 
-                <!--hinnoittelutavan valinta-->
+                <!--hinnoittelutavan valinta: huutokauppa vai kiinteä hinta-->
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="exampleRadios" id="radio-set-price" value="set-price" checked>
                     <label class="form-check-label" for="radio-set-price">
@@ -99,7 +99,7 @@
                         </div>
                     </div>
 
-                    <!-- sulkautumis-pvm -->
+                    <!-- sulkeutumis-pvm -->
                     <div>
                         <label for="auction-end">Huutokauppa päättyy:</label>
                         <input type="datetime-local" id="auction-end" min="">

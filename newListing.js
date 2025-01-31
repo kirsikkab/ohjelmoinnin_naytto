@@ -89,10 +89,7 @@ function dateControl() {
         const selectedDate = new Date(auctionEndInput.value);
 
         // Jos valittu päivä on tänään, tarkistetaan myös kellonaika
-        if (
-            selectedDate.toDateString() === now.toDateString() &&
-            selectedDate.getTime() < now.getTime()
-        ) {
+        if (selectedDate.toDateString() === now.toDateString() && selectedDate.getTime() < now.getTime()) {
             showAlert('alert-new-listing', 'Valitse tulevaisuuteen sijoittuva kellonaika!', 'danger');
             auctionEndInput.value = ""; // Tyhjennä kenttä
         }
