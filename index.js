@@ -65,6 +65,7 @@ function checkLogin(){
     modifyButtons()
 }
 
+//Luodaan etusivulle localStorageen tallennetut ilmoitukset
 document.addEventListener("DOMContentLoaded", function () {
     const listingsContainer = document.getElementById("listings");
 
@@ -105,32 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
         listingsContainer.appendChild(listingElement);
 
         modifyButtons()
-    });
-});
-
-// Aktiivinen ilmoitus
-let activeListingElement = null; 
-
-// Viestin lähetys ja tarjouksen teko -modaleihin myyntikohteen tiedot
-document.addEventListener('DOMContentLoaded', function () {
-
-    const modals = ['messageModal', 'bidModal'];
-
-    modals.forEach(modalId => {
-        const modal = document.getElementById(modalId);
-
-        modal.addEventListener('show.bs.modal', function (event) {
-            const btn = event.relatedTarget; 
-            const itemName = btn.getAttribute('data-bs-whatever'); 
-            const pModal = modal.querySelector('.p-modal'); 
-
-            if (modalId === 'messageModal') {
-                pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
-            } else if (modalId === 'bidModal') {
-                pModal.textContent = `Tee tarjous kohteeseen: ${itemName}`;
-                activeListingElement = btn.closest('.listing');
-            }
-        });
     });
 });
 
@@ -185,6 +160,32 @@ function modifyButtons(){
     }
 }
 
+// Aktiivinen ilmoitus
+let activeListingElement = null; 
+
+// Viestin lähetys ja tarjouksen teko -modaleihin myyntikohteen tiedot
+document.addEventListener('DOMContentLoaded', function () {
+
+    const modals = ['messageModal', 'bidModal'];
+
+    modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+
+        modal.addEventListener('show.bs.modal', function (event) {
+            const btn = event.relatedTarget; 
+            const itemName = btn.getAttribute('data-bs-whatever'); 
+            const pModal = modal.querySelector('.p-modal'); 
+
+            if (modalId === 'messageModal') {
+                pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
+            } else if (modalId === 'bidModal') {
+                pModal.textContent = `Tee tarjous kohteeseen: ${itemName}`;
+                activeListingElement = btn.closest('.listing');
+            }
+        });
+    });
+});
+
 // Viestin lähetykseen liittyvät alertit
 const sendMessageButton = document.getElementById("btn-modal-send-msg");
 sendMessageButton.addEventListener('click', function () {
@@ -193,7 +194,7 @@ sendMessageButton.addEventListener('click', function () {
     const messageTextArea = document.getElementById('message-text');
     const messageText = messageTextArea.value.trim();
 
-    // Onko viestikenttä tyhjä?
+    // Jos viestikenttä on tyhjä
     if (messageText === "") {
         // Näytetään virheilmoitus
         showAlert('alert-msg', 'Kirjoitathan viestin viestikenttään!', 'danger');
@@ -351,6 +352,7 @@ document.getElementById("confirmDeleteButton").addEventListener("click", functio
     confirmationModal.hide();
 });
 
+//Alert-viestien näyttö
 function showAlert(divID, message, color) {
     const alertContainer = document.getElementById(`${divID}`);
     alertContainer.innerHTML = `
