@@ -10,7 +10,7 @@ document.addEventListener("load", checkLogin())
 
 // Siirrytäänkö kirjaudu- vai kirjaudu ulos -sivulle klikattaessa
 function clickLogin(){
-    if(document.getElementById("login-button").innerHTML == "Kirjaudu ulos"){
+    if(document.querySelector(".login-button").innerHTML == "Kirjaudu ulos"){
         localStorage.removeItem("name")
         localStorage.removeItem("locality")
         window.location.replace("logout.html")
@@ -26,7 +26,9 @@ function backToMain(){
 }
 
 // Luo uusi ilmoitus -nappi
-document.getElementById("btn-new-listing").addEventListener('click', createNewListing);
+document.querySelectorAll(".btn-new-listing").forEach(button => {
+    button.addEventListener('click', createNewListing);
+});
 
 function createNewListing() {
     window.location.replace("newListing.html")
@@ -35,24 +37,35 @@ function createNewListing() {
 // Tarkastaa, onko joku kirjautunut sisään ja vaihdetaanko sivun ulkomuotoa sen johdosta
 function checkLogin(){
     let username = localStorage.getItem("name")
+    let newListingButtons = document.querySelectorAll(".btn-new-listing");
+    let loginButtons = document.querySelectorAll(".login-button");
     if (username == null){
-        if (document.getElementById("btn-new-listing").classList[1] != "invisible"){
-            document.getElementById("btn-new-listing").classList.add("invisible")
-        }
+        newListingButtons.forEach(button => {
+            if (!button.classList.contains("invisible")) {
+                button.classList.add("invisible");
+            }
+        });
         if (document.getElementById("btn-message").classList[2] != "invisible"){
             document.getElementById("btn-message").classList.add("invisible")
         }
     }
     else if (username != null){
-        if (document.getElementById("btn-new-listing").classList[1] == "invisible"){
-            document.getElementById("btn-new-listing").classList.remove("invisible")
-            document.getElementById("btn-message").classList.remove("invisible")
-            document.getElementById("login-button").innerHTML = "Kirjaudu ulos"
-        }
+
+        newListingButtons.forEach(button => {
+            if (button.classList.contains("invisible")) {
+                button.classList.remove("invisible");
+            }
+        });
+        document.getElementById("btn-message").classList.remove("invisible")
+        
+        loginButtons.forEach(button => {
+            button.innerText = "Kirjaudu ulos";
+        });
     }
     modifyButtons()
-    }
+}
 
+//Luodaan etusivulle localStorageen tallennetut ilmoitukset
 document.addEventListener("DOMContentLoaded", function () {
     const listingsContainer = document.getElementById("listings");
 
@@ -72,9 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ${
                 listing.isAuction
                     ? `<p class="listing-price">Lähtöhinta: <span class="start-price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>
-                       <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
-                           listing.auctionEnd
-                       ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
+                       <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(listing.auctionEnd).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
                        <p class="highest-bid m-0 ${listing.isHighestBidVisible ? '' : 'invisible'}">Korkein tarjous: <span class="bid">${listing.highestBid.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
@@ -95,32 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
         listingsContainer.appendChild(listingElement);
 
         modifyButtons()
-    });
-});
-
-// Aktiivinen ilmoitus
-let activeListingElement = null; 
-
-// Viestin lähetys ja tarjouksen teko -modaleihin myyntikohteen tiedot
-document.addEventListener('DOMContentLoaded', function () {
-
-    const modals = ['messageModal', 'bidModal'];
-
-    modals.forEach(modalId => {
-        const modal = document.getElementById(modalId);
-
-        modal.addEventListener('show.bs.modal', function (event) {
-            const btn = event.relatedTarget; 
-            const itemName = btn.getAttribute('data-bs-whatever'); 
-            const pModal = modal.querySelector('.p-modal'); 
-
-            if (modalId === 'messageModal') {
-                pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
-            } else if (modalId === 'bidModal') {
-                pModal.textContent = `Tee tarjous kohteeseen: ${itemName}`;
-                activeListingElement = btn.closest('.listing');
-            }
-        });
     });
 });
 
@@ -175,6 +160,32 @@ function modifyButtons(){
     }
 }
 
+// Aktiivinen ilmoitus
+let activeListingElement = null; 
+
+// Viestin lähetys ja tarjouksen teko -modaleihin myyntikohteen tiedot
+document.addEventListener('DOMContentLoaded', function () {
+
+    const modals = ['messageModal', 'bidModal'];
+
+    modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+
+        modal.addEventListener('show.bs.modal', function (event) {
+            const btn = event.relatedTarget; 
+            const itemName = btn.getAttribute('data-bs-whatever'); 
+            const pModal = modal.querySelector('.p-modal'); 
+
+            if (modalId === 'messageModal') {
+                pModal.textContent = `Viesti koskien kohdetta: ${itemName}`;
+            } else if (modalId === 'bidModal') {
+                pModal.textContent = `Tee tarjous kohteeseen: ${itemName}`;
+                activeListingElement = btn.closest('.listing');
+            }
+        });
+    });
+});
+
 // Viestin lähetykseen liittyvät alertit
 const sendMessageButton = document.getElementById("btn-modal-send-msg");
 sendMessageButton.addEventListener('click', function () {
@@ -183,7 +194,7 @@ sendMessageButton.addEventListener('click', function () {
     const messageTextArea = document.getElementById('message-text');
     const messageText = messageTextArea.value.trim();
 
-    // Onko viestikenttä tyhjä?
+    // Jos viestikenttä on tyhjä
     if (messageText === "") {
         // Näytetään virheilmoitus
         showAlert('alert-msg', 'Kirjoitathan viestin viestikenttään!', 'danger');
@@ -197,9 +208,7 @@ sendMessageButton.addEventListener('click', function () {
     messageTextArea.value = "";
 
     // Piilotetaan modal
-    const messageModal = document.getElementById('messageModal');
-    const modal = bootstrap.Modal.getInstance(messageModal);
-    modal.hide(); 
+    hideModal('messageModal')
 });
 
 const makeBidButton = document.getElementById("btn-modal-make-bid");
@@ -248,9 +257,7 @@ function makeBid(listingTitle) {
         bidAmount.value = '';
 
         // Piilotetaan modal
-        const bidModal = document.getElementById('bidModal');
-        const modal = bootstrap.Modal.getInstance(bidModal);
-        modal.hide();
+        hideModal('bidModal')
 
         // Näytetään onnistumisilmoitus
         showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
@@ -266,7 +273,7 @@ function makeBid(listingTitle) {
 
 // Aalto-vaasista tarjoaminen
 document.addEventListener("click", function (event) {
-    if (event.target && event.target.id === "btn-modal-make-bid") {
+    if (event.target && event.target.id === "btn-modal-bid-vase") {
         bidForVase()
     }
 });
@@ -290,10 +297,9 @@ function bidForVase(){
         bidAmountVase.value = '';
 
         // Piilotetaan modal
-        const bidModalVase = document.getElementById('bidModalVase');
-        const modal = bootstrap.Modal.getInstance(bidModalVase);
-        modal.hide();
+        hideModal('bidModalVase')
 
+        //Näytetään viesti tarjouksen tekemisestä
         showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
     } else {
         showAlert('alert-msg', 'Tarjouksen täytyy olla korkeampi kuin nykyinen korkein tarjous!', 'danger');
@@ -346,6 +352,7 @@ document.getElementById("confirmDeleteButton").addEventListener("click", functio
     confirmationModal.hide();
 });
 
+//Alert-viestien näyttö
 function showAlert(divID, message, color) {
     const alertContainer = document.getElementById(`${divID}`);
     alertContainer.innerHTML = `
@@ -362,3 +369,11 @@ function showAlert(divID, message, color) {
         alertContainer.innerHTML = ''; // Tyhjennetään sisältö
     }, 5000);
 }
+
+// Piilotetaan modal
+function hideModal(element) {
+    const bidModal = document.getElementById(element);
+    const modal = bootstrap.Modal.getInstance(bidModal);
+    modal.hide();
+}
+
