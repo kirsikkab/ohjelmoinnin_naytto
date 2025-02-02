@@ -207,9 +207,7 @@ sendMessageButton.addEventListener('click', function () {
     messageTextArea.value = "";
 
     // Piilotetaan modal
-    const messageModal = document.getElementById('messageModal');
-    const modal = bootstrap.Modal.getInstance(messageModal);
-    modal.hide(); 
+    hideModal('messageModal')
 });
 
 const makeBidButton = document.getElementById("btn-modal-make-bid");
@@ -258,9 +256,7 @@ function makeBid(listingTitle) {
         bidAmount.value = '';
 
         // Piilotetaan modal
-        const bidModal = document.getElementById('bidModal');
-        const modal = bootstrap.Modal.getInstance(bidModal);
-        modal.hide();
+        hideModal('bidModal')
 
         // Näytetään onnistumisilmoitus
         showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
@@ -300,10 +296,9 @@ function bidForVase(){
         bidAmountVase.value = '';
 
         // Piilotetaan modal
-        const bidModalVase = document.getElementById('bidModalVase');
-        const modal = bootstrap.Modal.getInstance(bidModalVase);
-        modal.hide();
+        hideModal('bidModalVase')
 
+        //Näytetään viesti tarjouksen tekemisestä
         showAlert('alert-msg', 'Kiitos, tarjouksesi on vastaanotettu!', 'success');
     } else {
         showAlert('alert-msg', 'Tarjouksen täytyy olla korkeampi kuin nykyinen korkein tarjous!', 'danger');
@@ -372,3 +367,11 @@ function showAlert(divID, message, color) {
         alertContainer.innerHTML = ''; // Tyhjennetään sisältö
     }, 5000);
 }
+
+// Piilotetaan modal
+function hideModal(element) {
+    const bidModal = document.getElementById(element);
+    const modal = bootstrap.Modal.getInstance(bidModal);
+    modal.hide();
+}
+
