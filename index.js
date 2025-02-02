@@ -10,7 +10,7 @@ document.addEventListener("load", checkLogin())
 
 // Siirrytäänkö kirjaudu- vai kirjaudu ulos -sivulle klikattaessa
 function clickLogin(){
-    if(document.getElementById("login-button").innerHTML == "Kirjaudu ulos"){
+    if(document.querySelector(".login-button").innerHTML == "Kirjaudu ulos"){
         localStorage.removeItem("name")
         localStorage.removeItem("locality")
         window.location.replace("logout.html")
@@ -26,7 +26,9 @@ function backToMain(){
 }
 
 // Luo uusi ilmoitus -nappi
-document.getElementById("btn-new-listing").addEventListener('click', createNewListing);
+document.querySelectorAll(".btn-new-listing").forEach(button => {
+    button.addEventListener('click', createNewListing);
+});
 
 function createNewListing() {
     window.location.replace("newListing.html")
@@ -35,23 +37,33 @@ function createNewListing() {
 // Tarkastaa, onko joku kirjautunut sisään ja vaihdetaanko sivun ulkomuotoa sen johdosta
 function checkLogin(){
     let username = localStorage.getItem("name")
+    let newListingButtons = document.querySelectorAll(".btn-new-listing");
+    let loginButtons = document.querySelectorAll(".login-button");
     if (username == null){
-        if (document.getElementById("btn-new-listing").classList[1] != "invisible"){
-            document.getElementById("btn-new-listing").classList.add("invisible")
-        }
+        newListingButtons.forEach(button => {
+            if (!button.classList.contains("invisible")) {
+                button.classList.add("invisible");
+            }
+        });
         if (document.getElementById("btn-message").classList[2] != "invisible"){
             document.getElementById("btn-message").classList.add("invisible")
         }
     }
     else if (username != null){
-        if (document.getElementById("btn-new-listing").classList[1] == "invisible"){
-            document.getElementById("btn-new-listing").classList.remove("invisible")
-            document.getElementById("btn-message").classList.remove("invisible")
-            document.getElementById("login-button").innerHTML = "Kirjaudu ulos"
-        }
+
+        newListingButtons.forEach(button => {
+            if (button.classList.contains("invisible")) {
+                button.classList.remove("invisible");
+            }
+        });
+        document.getElementById("btn-message").classList.remove("invisible")
+        
+        loginButtons.forEach(button => {
+            button.innerText = "Kirjaudu ulos";
+        });
     }
     modifyButtons()
-    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const listingsContainer = document.getElementById("listings");
@@ -72,9 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ${
                 listing.isAuction
                     ? `<p class="listing-price">Lähtöhinta: <span class="start-price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>
-                       <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(
-                           listing.auctionEnd
-                       ).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
+                       <p class="closing-date">Huutokauppa sulkeutuu: <span class="date">${new Date(listing.auctionEnd).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</span></p>
                        <p class="highest-bid m-0 ${listing.isHighestBidVisible ? '' : 'invisible'}">Korkein tarjous: <span class="bid">${listing.highestBid.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
                     : `<p class="listing-price"><span class="price">${listing.price.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> €</p>`
             }
@@ -266,7 +276,7 @@ function makeBid(listingTitle) {
 
 // Aalto-vaasista tarjoaminen
 document.addEventListener("click", function (event) {
-    if (event.target && event.target.id === "btn-modal-make-bid") {
+    if (event.target && event.target.id === "btn-modal-bid-vase") {
         bidForVase()
     }
 });

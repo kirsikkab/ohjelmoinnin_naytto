@@ -16,14 +16,23 @@
 </head>
 <body class="theme2 d-flex flex-column">
 
-    <header class="d-flex align-items-center justify-content-between theme1 px-5 py-3">
-
-      <button class="theme2" id="btn-change-theme" onclick="changeThemes()">Vaihda tummaan tilaan</button>
-        <div class="flex-fill"></div>
-        <h1 onclick="backToMain()" class="aclonica-regular text-start">Nettikirppis</h1>
-        <div id="btns-header" class="d-flex flex-column align-items-end">
-
-             <div class="search-container">
+    <header class="d-flex align-items-center justify-content-between theme1 px-3 py-2">
+        <div class="d-flex align-items-start">
+            <button id="btn-change-theme" onclick="changeThemes()">Vaihda tumman tilaan</button>
+        </div>
+        <div class="d-flex align-items-center">
+            <h1 onclick="backToMain()" class="aclonica-regular">Nettikirppis</h1>
+        </div>
+    
+        <!-- Hamburger-menu nappi -->
+        <button class="menu-icon theme2 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobile-menu">
+            ☰
+        </button>
+    
+        <!-- Hakukenttä +  Jätä myynti-tilmoitus - ja Kirjautumis-napit-->
+        <div id="btns-header" class="d-none d-lg-flex flex-column align-items-end">
+            
+            <div class="search-container mx-2">
                 <input type="text" class="theme2" id="searchKeyword" placeholder="Hakusana">
                 <select id="searchCategory" class="theme2">
                     <option value="">Valitse kategoria</option>
@@ -37,15 +46,31 @@
                 </select>
                 <button class="theme2" onclick="filterListings()">Hae</button>
             </div>
-
-            <!--Myynti-ilmoitusnappi-->
-            <button id="btn-new-listing" class="theme2 invisible">Jätä myynti-ilmoitus</button> 
-
-            <!--Kirjautumisnappi-->
-            <button onclick="clickLogin()" class="theme2" id="login-button">Kirjaudu/Rekisteröidy</button>
+            <button class="btn-new-listing theme2 invisible">Jätä myynti-ilmoitus</button> 
+            <button onclick="clickLogin()" class="login-button theme2">Kirjaudu/Rekisteröidy</button>
         </div>
-
+    
+        <!-- Hampurilaismenu (mobiilissa) -->
+        <div id="mobile-menu" class="collapse d-lg-none theme1 p-3">
+            <div class="search-container d-flex flex-column">
+                <input type="text" class="theme2 w-100 mb-2" id="searchKeyword" placeholder="Hakusana">
+                <select id="searchCategory" class="theme2 w-100 mb-2">
+                    <option value="">Valitse kategoria</option>
+                    <option value="lasten vaatteet">Lasten vaatteet</option>
+                    <option value="naisten vaatteet">Naisten vaatteet</option>
+                    <option value="miesten vaatteet">Miesten vaatteet</option>
+                    <option value="kodin tavarat">Kodin tavarat</option>
+                    <option value="lemmikkien tavarat">Lemmikkien tavarat</option>
+                    <option value="viihde">Viihde</option>
+                    <option value="elektroniikka">Elektroniikka</option>
+                </select>
+                <button class="theme2 w-100 mb-4" onclick="filterListings()">Hae</button>
+            </div>
+            <button class="btn-new-listing theme2 w-100 mb-2 invisible">Jätä myynti-ilmoitus</button> 
+            <button onclick="clickLogin()" class="login-button theme2 w-100">Kirjaudu/Rekisteröidy</button>
+        </div>
     </header>
+    
 
     <div class="main-content theme2">
         <!--Alert-->
@@ -185,7 +210,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="theme2" data-bs-dismiss="modal">Sulje</button>
-              <button type="button" id="btn-modal-make-bid" class="theme1">Tee tajous</button>
+              <button type="button" id="btn-modal-bid-vase" class="theme1">Tee tajous</button>
             </div>
           </div>
         </div>

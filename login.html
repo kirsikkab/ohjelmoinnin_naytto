@@ -17,13 +17,15 @@
 <body class="theme2 d-flex flex-column">
 
     <header class="theme1 m-0">
+        <div class="d-flex align-items-start">
+            <button id="btn-change-theme" onclick="changeThemes()">Vaihda tumman tilaan</button>
+        </div>
         <div class="d-flex justify-content-center">
             <h1 onclick="backToMain()" class="aclonica-regular text-center">Nettikirppis</h1>
         </div>
     </header>
 
     <button id="back-button" onclick=backToMain()>Takaisin etusivulle</button>
-    <button id="btn-change-theme" onclick=changeThemes()>Vaihda vaaleaan tilaan</button>
 
     <div id="alert-error" class="alert alert-container p-5"></div>
 
