@@ -229,23 +229,4 @@ vaalea: #DADEEA
 oranssi: #F5A623
 punainen: #C1121F
 
-@media (max-width: 768px) {
-    h1 {
-        font-size: 36px;
-    }
-    #btns-header {
-        padding-top: 5px;
-        flex-direction: row !important;
-    }
-    #btn-new-listing, #login-button {
-        padding: 2px 7px;
-    }
-    .flex-fill {
-        display: none;
-    }
-
-    #alert-msg, #alert-new-listing, #alert-error {
-        max-width: 90%;
-    }
-}
 */
