@@ -187,8 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Viestin lähetykseen liittyvät alertit
-const sendMessageButton = document.getElementById("btn-modal-send-msg");
-sendMessageButton.addEventListener('click', function () {
+function sendMessageAlertText() {
 
     // Hae viestikentän sisältö
     const messageTextArea = document.getElementById('message-text');
@@ -209,11 +208,16 @@ sendMessageButton.addEventListener('click', function () {
 
     // Piilotetaan modal
     hideModal('messageModal')
-});
+};
 
+const sendMessageButton = document.getElementById("btn-modal-send-msg");
+sendMessageButton.addEventListener('click', sendMessageAlertText);
+
+
+//Huutokauppa
 const makeBidButton = document.getElementById("btn-modal-make-bid");
 
-// Haetaan ilmoituksen otsikko Tarjoa hintaa -napista
+// Haetaan ilmoituksen otsikko ilmoituksen Tarjoa hintaa -napista
 let currentTitle;
 function biddingInfo(button) {
     currentTitle = button.getAttribute("data-bs-whatever"); 
@@ -350,8 +354,7 @@ document.getElementById("confirmDeleteButton").addEventListener("click", functio
     listingToDelete = null;
 
     // Sulje modaali
-    const confirmationModal = bootstrap.Modal.getInstance(document.getElementById("confirmationModal"));
-    confirmationModal.hide();
+    hideModal('confirmationModal')
 });
 
 //Alert-viestien näyttö
@@ -373,8 +376,10 @@ function showAlert(divID, message, color) {
 
 // Piilotetaan modal
 function hideModal(element) {
-    const bidModal = document.getElementById(element);
-    const modal = bootstrap.Modal.getInstance(bidModal);
-    modal.hide();
+    const modal = document.getElementById(element);
+    const modalToHide = bootstrap.Modal.getInstance(modal);
+    modalToHide.hide();
 }
+
+
 
