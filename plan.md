@@ -7,7 +7,7 @@ Sovellus, johon käyttäjä voi lisätä omia myynti-ilmoituksia, selata ja hake
 -Sivun ylälaidassa rekisteröitymis/kirjautumismahdollisuus käyttäjälle ja ylläpitäjälle
 -Rekisteröitymisen yhteydessä kysytään sähköpostiosoite, käyttäjätunnus, salasana ja paikkakunta 
 -Käyttäjä voi lisätä oman ilmoituksia, lähettää viestin myyjälle / jättää tarjouksen
--Ylläpitäjä voi tarkastella ilmoituksia ja poistaa tarvittaessa ilmoituksen
+-Ylläpitäjä voi poistaa tarvittaessa ilmoituksen
 
 ## Myynti-ilmoituksen lisäys
 -Vaadittavat tiedot: Otsikko, kuvaus, kategoria (valitaan pudotusvalikosta), hinnoittelu
