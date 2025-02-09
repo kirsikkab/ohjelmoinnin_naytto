@@ -38,12 +38,10 @@ function createNewListing() {
 function checkLogin(){
     let username = localStorage.getItem("name")
     let loginButtons = document.querySelectorAll(".login-button");
-    let newListingButton = document.getElementById("new-listing")
     if (username == null){
         if (document.getElementById("btn-message").classList[2] != "invisible"){
             document.getElementById("btn-message").classList.add("invisible");
         }
-        newListingButton.style.display = "none"
     }
     else if (username != null){
         document.getElementById("btn-message").classList.remove("invisible");
@@ -104,7 +102,7 @@ function modifyButtons(){
     let sendButtons = document.getElementsByClassName("btn-send-message")
     let offerButtons = document.getElementsByClassName("btn-bid")
     let removeButtons = document.getElementsByClassName("delete-listing")
-    let newListingButton = document.getElementById("new-listing")
+    let newListingButtons = document.getElementsByClassName("btn-new-listing")
     username = localStorage.getItem("name")
     for (let i = 0; i < sendButtons.length; i++){
         if (username == null){
@@ -122,6 +120,14 @@ function modifyButtons(){
             offerButtons[i].style.display = ""
         }
     }
+    for (let i = 0; i < newListingButtons.length; i++){
+        if (username == null){
+            newListingButtons[i].style.display = "none"
+        }
+        else if (username != null){
+            newListingButtons[i].style.display = ""
+        }
+    }
 
     if (localStorage.getItem("admins") != "{}"){
         let admins = JSON.parse(localStorage.getItem("admins"))
@@ -130,12 +136,8 @@ function modifyButtons(){
                 for (let i = 0; i < removeButtons.length; i++){
                     removeButtons[i].style.display = "none"
                 }
-                if (username == "null"){
-                    newListingButton.style.display = ""
-                }
             }
             else if (username == Object.keys(admins)[i]){
-                newListingButton.style.display = "none"
                 for (let i = 0; i < removeButtons.length; i++){
                     removeButtons[i].style.display = ""
                 }
@@ -144,6 +146,9 @@ function modifyButtons(){
                 }
                 for (let i = 0; i < offerButtons.length; i++){
                     offerButtons[i].style.display = "none"
+                }
+                for (let i = 0; i < newListingButtons.length; i++){
+                    newListingButtons[i].style.display = "none"
                 }
             }
         }
