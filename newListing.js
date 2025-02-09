@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
 
         // Kerää lomaketiedot
-        const radioSetPrice = document.getElementById("radio-set-price");
         const radioAuction = document.getElementById("radio-auction");
 
         const title = document.getElementById("listing-name").value;
@@ -24,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? document.getElementById("starting-price").value
             : document.getElementById("set-price").value;
         const auctionEnd = document.getElementById("auction-end").value;
+        
         // Hae sessionStoragesta tallennettu paikkakunta
         const userLocality = sessionStorage.getItem('locality');
         const isHighestBidVisible = false;
