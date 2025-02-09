@@ -80,7 +80,7 @@ function auctionOrNot() {
     }
 }
 
-// Huutokaupan sulkeutumisjakasi ei voi valita mennyttä aikaa
+// Huutokaupan sulkeutumisajaksi ei voi valita mennyttä aikaa
 function dateControl() {
     const auctionEndInput = document.getElementById("auction-end");
 
@@ -97,10 +97,12 @@ function dateControl() {
 
     // Aseta pvm minimiarvo sivun latauksen yhteydessä
     setMinDateTime();
+}
 
-    function setMinDateTime() {
-        const now = new Date();
-        const isoString = now.toISOString().slice(0, 16);
-        auctionEndInput.min = isoString;
-    }
+// Asettaa päivämääräkentän minimiajaksi nykyhetken
+function setMinDateTime() {
+    const auctionEndInput = document.getElementById("auction-end");
+    const now = new Date();
+    const isoString = now.toISOString().slice(0, 16);
+    auctionEndInput.min = isoString;
 }
