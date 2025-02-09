@@ -46,7 +46,7 @@ function checkLogin(){
             }
         });
         if (document.getElementById("btn-message").classList[2] != "invisible"){
-            document.getElementById("btn-message").classList.add("invisible")
+            document.getElementById("btn-message").classList.add("invisible");
         }
     }
     else if (username != null){
@@ -56,7 +56,7 @@ function checkLogin(){
                 button.classList.remove("invisible");
             }
         });
-        document.getElementById("btn-message").classList.remove("invisible")
+        document.getElementById("btn-message").classList.remove("invisible");
         
         loginButtons.forEach(button => {
             button.innerText = "Kirjaudu ulos";
@@ -93,12 +93,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="d-flex justify-content-center">
                     ${
                         listing.isAuction
-                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}" data-title="${listing.title}" onclick="biddingInfo(this)">Tarjoa hintaa</button>`
+                            ? `<button class="btn-bid theme1" data-bs-toggle="modal" data-bs-target="#bidModal" data-bs-whatever="${listing.title}" onclick="biddingInfo(this)">Tarjoa hintaa</button>`
                             : `<button class="btn-send-message theme1" data-bs-toggle="modal" data-bs-target="#messageModal" data-bs-whatever="${listing.title}">Lähetä viesti myyjälle</button>`
                     }
                 </div>
                 <div class="d-flex justify-content-center">
-                        <button class="delete-listing theme1" data-title="${listing.title}" onclick="deleteListing(this)">Poista ilmoitus</button>
+                        <button class="delete-listing theme1" data-bs-whatever="${listing.title}" onclick="deleteListing(this)">Poista ilmoitus</button>
                 </div>
             </div>
         `;
@@ -216,7 +216,7 @@ const makeBidButton = document.getElementById("btn-modal-make-bid");
 // Haetaan ilmoituksen otsikko Tarjoa hintaa -napista
 let currentTitle;
 function biddingInfo(button) {
-    currentTitle = button.getAttribute("data-title"); 
+    currentTitle = button.getAttribute("data-bs-whatever"); 
 }
 
 // Tarjouksen teko
@@ -317,11 +317,13 @@ function deleteListing(button) {
     // poistettavan ilmoituksen elementti ja otsikko
     listingToDelete = {
         element: button.closest(".listing"),
-        title: button.getAttribute("data-title")
+        title: button.getAttribute("data-bs-whatever")
     };
 
     // Avataan vahvistusmodaali
     const confirmationModal = new bootstrap.Modal(document.getElementById("confirmationModal"));
+    const itemToDelete = document.getElementById('item-to-delete');
+    itemToDelete.innerText = listingToDelete.title;
     confirmationModal.show();
 }
 
@@ -355,12 +357,11 @@ document.getElementById("confirmDeleteButton").addEventListener("click", functio
 //Alert-viestien näyttö
 function showAlert(divID, message, color) {
     const alertContainer = document.getElementById(`${divID}`);
-    alertContainer.innerHTML = `
-        <div class="alert alert-${color} alert-dismissible fade show" role="alert">
-            ${message}
+    alertContainer.innerHTML = 
+        `<div class="alert alert-${color} alert-dismissible fade show" role="alert">
+            <p class='mb-0'>${message}</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    `;
+        </div>`;
     alertContainer.style.display = 'block';
 
     // Piilota ilmoitus 5 sekunnin kuluttua
